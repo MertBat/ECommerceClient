@@ -1,0 +1,13 @@
+.list {
+    margin: 10px;
+}
+
+.listitem {
+    text-decoration: none;
+}
+
+.listitem:hover,
+.listitem:focus {
+    color: grey;
+   font-weight: 800;
+}
