@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { AdminModule } from './admin/admin.module';
 import { UiModule } from './ui/ui.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { BaseComponent } from './base/base.component';
 
 @NgModule({
   declarations: [
@@ -17,8 +19,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AdminModule,
     UiModule,
     BrowserAnimationsModule,
+    NgxSpinnerModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
