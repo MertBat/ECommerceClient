@@ -8,18 +8,9 @@ import { AlertifyService, MessageType, Position } from 'src/app/services/admin/a
 })
 export class LayoutComponent implements OnInit {
 
-  constructor(private alertify: AlertifyService) {}
+  constructor() {}
 
   ngOnInit(): void {
-    this.alertify.message("mert",{
-      messageType: MessageType.Success,
-      delay: 5,
-      position: Position.TopCenter
-    });
-    // this.alertify.dismiss();
-  }
-   b(){
-    this.alertify.dismiss();
 
   }
 }

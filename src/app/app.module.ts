@@ -8,10 +8,13 @@ import { UiModule } from './ui/ui.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BaseComponent } from './base/base.component';
+import { HttpClientModule } from '@angular/common/http';
+import { DeleteDirective } from './directives/admin/delete.directive';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DeleteDirective
   ],
   imports: [
     BrowserModule,
@@ -20,8 +23,11 @@ import { BaseComponent } from './base/base.component';
     UiModule,
     BrowserAnimationsModule,
     NgxSpinnerModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {provide: "baseUrl", useValue: "https://localhost:7033/api/", multi:true}
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -14,7 +14,7 @@ export class OrderComponent extends BaseComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.showSpinner(SpinnerType.ballSpinClockwiseFadeRotating)   
+    // this.showSpinner(SpinnerType.ballSpinClockwiseFadeRotating)   
   }
 
 }

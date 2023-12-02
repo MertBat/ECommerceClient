@@ -9,7 +9,3 @@ declare var $:any
 export class AppComponent {
   title = 'ECommerceClient';
 }
-
-console.log($.get("https://localhost:7033/api/Products", data =>{
-  console.log(data)
-}));
