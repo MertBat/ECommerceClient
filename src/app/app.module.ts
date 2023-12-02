@@ -7,9 +7,10 @@ import { AdminModule } from './admin/admin.module';
 import { UiModule } from './ui/ui.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { BaseComponent } from './base/base.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DeleteDirective } from './directives/admin/delete.directive';
+import { FileUploadComponent } from './services/common/file-upload/file-upload.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { DeleteDirective } from './directives/admin/delete.directive';
     BrowserModule,
     AppRoutingModule,
     AdminModule,
+    ToastrModule.forRoot(),
     UiModule,
     BrowserAnimationsModule,
     NgxSpinnerModule,
