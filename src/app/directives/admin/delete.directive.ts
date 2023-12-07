@@ -16,6 +16,7 @@ import {
   DeleteState,
 } from 'src/app/dialogs/delete-dialog/delete-dialog.component';
 import { AlertifyService, MessageType, Position } from 'src/app/services/admin/alertify.service';
+import { DialogService } from 'src/app/services/common/dialog.service';
 import { HttpClientService } from 'src/app/services/common/http-client.service';
 import { ProductService } from 'src/app/services/common/models/product.service';
 
@@ -31,7 +32,8 @@ export class DeleteDirective {
     private httpClientService: HttpClientService,
     private spinner: NgxSpinnerService,
     public dialog: MatDialog,
-    private alertifyService:AlertifyService
+    private alertifyService:AlertifyService,
+    private dialogService: DialogService
   ) {
     const img = _render.createElement('img');
     img.setAttribute('src', '/src/assets/delete.png');
@@ -47,8 +49,12 @@ export class DeleteDirective {
 
   @HostListener('click')
   async onclick() {
-    this.openDialog(async () => {
-      this.spinner.getSpinner(SpinnerType.BallAtom);
+
+    this.dialogService.openDialog({
+      componentType: DeleteDialogComponent,
+      data: DeleteState.Yes,
+      afterClosed() {
+        this.spinner.getSpinner(SpinnerType.BallAtom);
       const td: HTMLTableColElement = this.element.nativeElement;
       this.httpClientService.delete(
           {
@@ -79,19 +85,7 @@ export class DeleteDirective {
             position: Position.TopRight
           })
         });
-    });
-  }
-
-  openDialog(confirmDelete: any): void {
-    const dialogRef = this.dialog.open(DeleteDialogComponent, {
-      width: '250px',
-      data: DeleteState.Yes,
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result == DeleteState.Yes) {
-        confirmDelete();
-      }
-    });
+      },
+    })      
   }
 }

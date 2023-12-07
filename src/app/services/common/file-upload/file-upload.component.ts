@@ -2,8 +2,24 @@ import { Component, Input } from '@angular/core';
 import { NgxFileDropEntry } from 'ngx-file-drop';
 import { HttpClientService } from '../http-client.service';
 import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { AlertifyService, MessageType, Position } from '../../admin/alertify.service';
-import { CustomToastrService, ToastrMessageType, ToastrPosition } from '../../ui/custom-toastr.service';
+import {
+  AlertifyService,
+  MessageType,
+  Position,
+} from '../../admin/alertify.service';
+import {
+  CustomToastrService,
+  ToastrMessageType,
+  ToastrPosition,
+} from '../../ui/custom-toastr.service';
+import { MatDialog } from '@angular/material/dialog';
+import {
+  FileUploadDialogComponent,
+  FileUploadDialogState,
+} from 'src/app/dialogs/file-upload-dialog/file-upload-dialog.component';
+import { DialogService } from '../dialog.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { SpinnerType } from 'src/app/base/base.component';
 
 @Component({
   selector: 'app-file-upload',
@@ -16,7 +32,10 @@ export class FileUploadComponent {
   constructor(
     private httpService: HttpClientService,
     private alertifyService: AlertifyService,
-    private customToastrService: CustomToastrService
+    private customToastrService: CustomToastrService,
+    private dialog: MatDialog,
+    private dialogService:DialogService,
+    private spinner: NgxSpinnerService
   ) {}
 
   public files: NgxFileDropEntry[] = [];
@@ -29,48 +48,55 @@ export class FileUploadComponent {
         fileData.append(_file.name, _file, file.relativePath);
       });
     }
-    this.httpService
-      .post(
-        {
-          controller: this.options.controller,
-          action: this.options.action,
-          queryString: this.options.queryString,
-          headers: new HttpHeaders({ responseType: 'blob' }),
-        },
-        fileData
-      )
-      .subscribe(
-        (data) => {
-          const message = "Files successfully save"
-          if (this.options.isAdminPage) {
-            this.alertifyService.message(message, {
-              dismissOthers: true,
-              messageType: MessageType.Success,
-              position: Position.TopRight
-            });
-          } else {
-            this.customToastrService.message(message, "Success",{
-              messageType: ToastrMessageType.Success,
-              position: ToastrPosition.TopRight
-            })
+    this.dialogService.openDialog({
+      componentType: FileUploadDialogComponent,
+      data: FileUploadDialogState.Yes,
+      afterClosed: () => {
+        this.spinner.show(SpinnerType.BallAtom)
+        this.httpService
+        .post(
+          {
+            controller: this.options.controller,
+            action: this.options.action,
+            queryString: this.options.queryString,
+            headers: new HttpHeaders({ responseType: 'blob' })
+          },fileData)
+        .subscribe(
+          (data) => {
+            const message = 'Files successfully save';
+            this.spinner.hide(SpinnerType.BallAtom)
+            if (this.options.isAdminPage) {
+              this.alertifyService.message(message, {
+                dismissOthers: true,
+                messageType: MessageType.Success,
+                position: Position.TopRight,
+              });
+            } else {
+              this.customToastrService.message(message, 'Success', {
+                messageType: ToastrMessageType.Success,
+                position: ToastrPosition.TopRight,
+              });
+            }           
+          },
+          (errorResponse: HttpErrorResponse) => {
+            const message = 'Something went wrong';
+            this.spinner.hide(SpinnerType.BallAtom)
+            if (this.options.isAdminPage) {
+              this.alertifyService.message(message, {
+                dismissOthers: true,
+                messageType: MessageType.Error,
+                position: Position.TopRight,
+              });
+            } else {
+              this.customToastrService.message(message, 'Fail!', {
+                messageType: ToastrMessageType.Error,
+                position: ToastrPosition.TopRight,
+              });
+            }
           }
-        },
-        (errorResponse: HttpErrorResponse) => {
-          const message = "Something went wrong"
-          if (this.options.isAdminPage) {
-            this.alertifyService.message(message, {
-              dismissOthers: true,
-              messageType: MessageType.Error,
-              position: Position.TopRight
-            });
-          } else {
-            this.customToastrService.message(message, "Fail!",{
-              messageType: ToastrMessageType.Error,
-              position: ToastrPosition.TopRight
-            })
-          }
-        }
-      );
+        );
+      },
+    })
   }
 }
 
