@@ -1,0 +1,124 @@
+<div class="register">
+  <form [formGroup]="frm" (ngSubmit)="onSubmit(frm.value)">
+    <div class="mb-3">
+      <label for="name" class="form-label">Name Surname *</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        placeholder="Name and surname"
+        aria-describedby="emailHelp"
+        formControlName="name"
+        [ngClass]="{ 'is-invalid': submitted && component.name.errors }"
+      />
+      <small
+        class="form-text text-muted"
+        *ngIf="submitted && component.name.errors?.required"
+      >
+        Please enter your name
+      </small>
+      <small
+        class="form-text text-muted"
+        *ngIf="
+          submitted &&
+          (component.name.errors?.maxlength || component.name.errors?.minlength)
+        "
+      >
+        Character length must be between 3-50
+      </small>
+    </div>
+    <div class="mb-3">
+      <label for="userName" class="form-label">User Name *</label>
+      <input
+        type="text"
+        class="form-control"
+        id="userName"
+        placeholder="User name"
+        aria-describedby="emailHelp"
+        formControlName="userName"
+        [ngClass]="{ 'is-invalid': submitted && component.userName.errors }"
+      />
+      <small
+        class="form-text text-muted"
+        *ngIf="submitted && component.userName.errors?.required"
+      >
+        Please enter userName
+      </small>
+      <small
+        class="form-text text-muted"
+        *ngIf="
+          submitted &&
+          (component.userName.errors?.maxlength || component.userName.errors?.minlength)
+        "
+      >
+        Character length must be between 3-50
+      </small>
+    </div>
+    <div class="mb-3">
+      <label for="eMail" class="form-label">E-mail address *</label>
+      <input
+        type="email"
+        class="form-control"
+        id="eMail"
+        placeholder="Email"
+        aria-describedby="emailHelp"
+        formControlName="eMail"
+        [ngClass]="{ 'is-invalid': submitted && component.eMail.errors }"
+      />
+      <small
+        class="form-text text-muted"
+        *ngIf="submitted && (component.eMail.errors?.required || component.eMail.errors?.email)"
+      >
+        Please enter valid E-mail
+      </small>
+      <small
+        class="form-text text-muted"
+        *ngIf="
+          submitted && component.eMail.errors?.maxlength"
+      >
+        Character length shouln't longer than 250
+      </small>
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password *</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        placeholder="Password"
+        formControlName="password"
+        [ngClass]="{ 'is-invalid': submitted && component.password.errors }"
+      />
+      <small
+        class="form-text text-muted"
+        *ngIf="submitted && component.password.errors?.required"
+      >
+        Please enter password
+      </small>
+    </div>
+    <div class="mb-3">
+      <label for="passwordCheck" class="form-label">Password Again *</label>
+      <input
+        type="password"
+        class="form-control"
+        id="passwordCheck"
+        placeholder="Password again"
+        formControlName="passwordAgain"
+        [ngClass]="{ 'is-invalid': submitted && component.passwordAgain.errors }"
+      />
+      <small
+        class="form-text text-muted"
+        *ngIf="submitted && component.passwordAgain.errors?.required"
+      >
+        Please enter password
+      </small>
+      <small
+        class="form-text text-muted"
+        *ngIf="submitted && frm.hasError('notSame')"
+      >
+        Please confirm password 
+      </small>
+    </div>
+    <button type="submit" class="btn btn-primary">Register</button>
+  </form>
+</div>

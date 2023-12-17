@@ -69,7 +69,11 @@ export class SelectProductImageDialogComponent
             var card = $(event.srcElement).parent().parent();
             card.fadeOut(500);
           }
-        );
+        ), (errorMessage) =>{
+          console.log(errorMessage)
+          this.spinner.hide(SpinnerType.BallAtom);
+        };
+        ;
       },
     });
   }

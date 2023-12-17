@@ -46,14 +46,15 @@ export class ListComponent extends BaseComponent implements OnInit{
       this.paginator ? this.paginator.pageIndex : 0, 
       this.paginator ? this.paginator.pageSize : 5, 
       () => this.hideSpinner(SpinnerType.BallAtom),
-      (errorMessage) =>
+      (errorMessage) =>{
         this.alertifyService.message(errorMessage, {
           dismissOthers: true,
           messageType: MessageType.Error,
           position: Position.TopRight,
         })
+      }
     );
-    this.dataSource.paginator = this.paginator;
+
     this.paginator.length = allProducts.totalCount;
     this.dataSource = new MatTableDataSource<List_Product>(allProducts.products) 
   }

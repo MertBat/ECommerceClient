@@ -7,7 +7,7 @@
     "forceConsistentCasingInFileNames": true,
     "strict": false, //null değerlerde hata vermesini engelliyor.
     "noImplicitOverride": true,
-    "noPropertyAccessFromIndexSignature": true,
+    "noPropertyAccessFromIndexSignature": false,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,

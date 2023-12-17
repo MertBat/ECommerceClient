@@ -17,14 +17,7 @@ import { ProductService } from 'src/app/services/common/models/product.service';
 })
 export class CreateComponent extends BaseComponent implements OnInit {
   @Output() createdProduct: EventEmitter<Create_product> = new EventEmitter();
-  @Output() fileUploadOptions: Partial<FileUploadOptions> = {
-    action: 'upload',
-    controller: 'products',
-    explanation: 'Pick Fotos or drag on it',
-    isAdminPage: true,
-    accept: '.png, .jpg, .jpeg',
-  };
-
+ 
   constructor(
     private productService: ProductService,
     spinner: NgxSpinnerService,
@@ -51,9 +44,9 @@ export class CreateComponent extends BaseComponent implements OnInit {
       () => {
         this.hideSpinner(SpinnerType.BallAtom);
         this.alertify.message('Ürün başarıyla eklenmiştir.', {
-          dismissOthers: true,
           messageType: MessageType.Success,
           position: Position.TopRight,
+          dismissOthers: true,
         });
         this.createdProduct.emit(create_product);
       },

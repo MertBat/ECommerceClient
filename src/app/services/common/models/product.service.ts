@@ -23,7 +23,6 @@ export class ProductService {
       .subscribe(
         (result) => {
           successCallBack();
-          alert('başarılı');
         },
         (errorResponse: HttpErrorResponse) => {
           const _error: Array<{ key: string; value: Array<string> }> =
@@ -47,8 +46,8 @@ export class ProductService {
   ): Promise<{totalCount: number; products: List_Product[];}> {
     const promisData: Promise<{totalCount: number; products: List_Product[];}> = this.httpClientService
       .get<{ totalCount: number; products: List_Product[] }>({
-        controller: 'products',
-        queryString: `page=${page}&size=${size}`,
+        controller: "products",
+        queryString: `page=${page}&size=${size}`
       })
       .toPromise();
 
