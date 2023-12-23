@@ -1,7 +1,12 @@
+import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { NgxFileDropEntry } from 'ngx-file-drop';
-import { HttpClientService } from '../http-client.service';
-import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { SpinnerType } from 'src/app/base/base.component';
+import {
+  FileUploadDialogComponent,
+  FileUploadDialogState,
+} from 'src/app/dialogs/file-upload-dialog/file-upload-dialog.component';
 import {
   AlertifyService,
   MessageType,
@@ -12,14 +17,8 @@ import {
   ToastrMessageType,
   ToastrPosition,
 } from '../../ui/custom-toastr.service';
-import { MatDialog } from '@angular/material/dialog';
-import {
-  FileUploadDialogComponent,
-  FileUploadDialogState,
-} from 'src/app/dialogs/file-upload-dialog/file-upload-dialog.component';
 import { DialogService } from '../dialog.service';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { SpinnerType } from 'src/app/base/base.component';
+import { HttpClientService } from '../http-client.service';
 
 @Component({
   selector: 'app-file-upload',
@@ -33,7 +32,6 @@ export class FileUploadComponent {
     private httpService: HttpClientService,
     private alertifyService: AlertifyService,
     private customToastrService: CustomToastrService,
-    private dialog: MatDialog,
     private dialogService:DialogService,
     private spinner: NgxSpinnerService
   ) {}
