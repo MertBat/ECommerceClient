@@ -26,13 +26,31 @@
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="Register"
+            <a
+              class="nav-link active"
+              aria-current="page"
+              routerLink="register"
+              *ngIf="authService.isAuthhenticated"
               >Register</a
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="Login"
+            <a
+              class="nav-link active"
+              aria-current="page"
+              routerLink="login"
+              *ngIf="!authService.isAuthhenticated"
               >Login</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link active"
+              aria-current="page"
+              style="background-color: red; color: white; cursor: pointer;"
+              *ngIf="authService.isAuthhenticated"
+              (click)="signOut()"
+              >Logout</a
             >
           </li>
           <!-- <li class="nav-item">
@@ -54,6 +72,7 @@
               class="nav-link active text-success"
               aria-disabled="true"
               routerLink="admin"
+              *ngIf="authService.isAuthhenticated"
               >Admin</a
             >
           </li>
@@ -70,7 +89,7 @@
       </div>
     </div>
   </nav>
-    <div class="mx-4"><router-outlet></router-outlet></div>
+  <div class="mx-4"><router-outlet></router-outlet></div>
 </div>
 
 <ngx-spinner name="s1" type="ball-spin-clockwise-fade-rotating"></ngx-spinner>

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './admin/layout/layout.component';
 import { DashboardComponent } from './admin/components/dashboard/dashboard.component';
 import { HomeComponent } from './ui/components/home/home.component';
+import { AuthGuard } from './guards/common/auth.guard';
 
 const routes: Routes = [
   {
@@ -15,23 +16,23 @@ const routes: Routes = [
         loadChildren: () =>
           import('./admin/components/customer/customer.module').then(
             (module) => module.CustomerModule
-          ),
+          ), canActivate: [AuthGuard]
       },
       {
         path: 'products',
         loadChildren: () =>
           import('./admin/components/products/products.module').then(
             (module) => module.ProductsModule
-          ),
-      },
+          ), canActivate: [AuthGuard]
+      }, 
       {
         path: 'orders',
         loadChildren: () =>
           import('./admin/components/order/order.module').then(
             (module) => module.OrderModule
-          ),
+          ), canActivate: [AuthGuard]
       },
-    ],
+    ], canActivate: [AuthGuard]
   },
   { path: '', component: HomeComponent },
   {
@@ -49,14 +50,14 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'Register',
+    path: 'register',
     loadChildren: () =>
       import('./ui/components/register/register.module').then(
         (module) => module.RegisterModule
       ),
   },
   {
-    path: 'Login',
+    path: 'login',
     loadChildren: () =>
       import('./ui/components/login/login.module').then(
         (module) => module.LoginModule

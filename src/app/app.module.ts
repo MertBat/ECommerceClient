@@ -9,6 +9,7 @@ import { AdminModule } from './admin/admin.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UiModule } from './ui/ui.module';
+import { JwtModule } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,14 @@ import { UiModule } from './ui/ui.module';
     UiModule,
     BrowserAnimationsModule,
     NgxSpinnerModule,
-    HttpClientModule
+    HttpClientModule,
+    JwtModule.forRoot({
+      config:{
+        tokenGetter: () => localStorage.getItem("accessToken"),
+        allowedDomains: ["localhost:7033"]
+        // disallowedRoutes gönderilmemesi gereken url ler için
+      }
+    })
   ],
   providers: [
     {provide: "baseUrl", useValue: "https://localhost:7033/api", multi:true}
