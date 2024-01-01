@@ -10,6 +10,7 @@ import {
   ToastrPosition,
 } from '../../ui/custom-toastr.service';
 import { HttpClientService } from '../http-client.service';
+import { SocialUser } from '@abacritt/angularx-social-login';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,7 @@ import { HttpClientService } from '../http-client.service';
 export class UserService {
   constructor(
     private httpService: HttpClientService,
-    private toastrService: CustomToastrService,
+    private toastrService: CustomToastrService
   ) {}
 
   async create(user: User): Promise<Create_User> {
@@ -52,6 +53,63 @@ export class UserService {
         position: ToastrPosition.TopRight,
       });
     }
+    callback();
+  }
+
+  async googleLogin(user: SocialUser, callback?: () => void): Promise<any> {
+    const observable: Observable<SocialUser | TokenResponse> =
+      this.httpService.post<SocialUser | TokenResponse>(
+        {
+          action: 'google-login',
+          controller: 'users',
+        },
+        user
+      );
+
+    const tokenResponse = (await firstValueFrom(observable)) as TokenResponse;
+    callback();
+    if (tokenResponse) {
+      localStorage.setItem('accessToken', tokenResponse.token.accessToken);
+      this.toastrService.message('Google access accepted', 'Success', {
+        messageType: ToastrMessageType.Success,
+        position: ToastrPosition.TopRight,
+      });
+    }else{
+      this.toastrService.message('Google access denied', 'Error', {
+        messageType: ToastrMessageType.Error,
+        position: ToastrPosition.TopRight,
+      });
+    }
+  }
+
+  async facebookLogin(user: SocialUser, callback?: () => void): Promise<any> {
+    const observable: Observable<SocialUser | TokenResponse> =
+      this.httpService.post<SocialUser | TokenResponse>(
+        {
+          controller: 'users',
+          action: 'facebook-login',
+        },
+        user
+      );
+
+    const tokenResponse: TokenResponse = (await firstValueFrom(
+      observable
+    )) as TokenResponse;
+
+    if (tokenResponse) {
+      localStorage.setItem('accessToken', tokenResponse.token.accessToken);
+
+      this.toastrService.message('Facebook access accepted', 'Success', {
+        messageType: ToastrMessageType.Success,
+        position: ToastrPosition.TopRight,
+      });
+    }else{
+      this.toastrService.message('Facebook access denied', 'Error', {
+        messageType: ToastrMessageType.Error,
+        position: ToastrPosition.TopRight,
+      });
+    }
+
     callback();
   }
 }
