@@ -30,7 +30,7 @@
               class="nav-link active"
               aria-current="page"
               routerLink="register"
-              *ngIf="authService.isAuthhenticated"
+              *ngIf="!authService.isAuthhenticated"
               >Register</a
             >
           </li>

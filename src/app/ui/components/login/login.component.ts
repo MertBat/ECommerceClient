@@ -10,7 +10,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
 import { LoginProduct } from 'src/app/contracts/users/login_product';
 import { AuthService } from 'src/app/services/common/auth.service';
-import { UserService } from 'src/app/services/common/models/user.service';
+import { UserAuthService } from 'src/app/services/common/models/user-auth.service';
 
 @Component({
   selector: 'app-login',
@@ -23,9 +23,9 @@ export class LoginComponent extends BaseComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserService,
     spinner: NgxSpinnerService,
     private authService: AuthService,
+    private userAuthService:UserAuthService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private socialAuthService: SocialAuthService
@@ -36,7 +36,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
 
       switch (user.provider) {
         case 'GOOGLE':
-          await this.userService.googleLogin(user, () => {
+          await this.userAuthService.googleLogin(user, () => {
             this.authService.identityCheck();
             this.hideSpinner(SpinnerType.BallScaleMultiple);
             this.activatedRoute.queryParams.subscribe((params) => {
@@ -46,7 +46,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
           });
           break;
         case 'FACEBOOK':
-          userService.facebookLogin(user, () => {
+          userAuthService.facebookLogin(user, () => {
             this.authService.identityCheck();
             this.hideSpinner(SpinnerType.BallScaleMultiple);
             this.activatedRoute.queryParams.subscribe((params) => {
@@ -76,7 +76,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
       return;
     }
     this.showSpinner(SpinnerType.BallScaleMultiple);
-    await this.userService.login(data, () => {
+    await this.userAuthService.login(data, () => {
       this.authService.identityCheck();
       this.hideSpinner(SpinnerType.BallScaleMultiple);
       this.activatedRoute.queryParams.subscribe((params) => {
