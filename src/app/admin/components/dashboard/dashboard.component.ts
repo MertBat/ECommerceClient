@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
+import { HubUrls } from 'src/app/constants/hub-urls';
+import { ReciveFunctions } from 'src/app/constants/recive-functions';
+import { AlertifyService, MessageType, Position } from 'src/app/services/admin/alertify.service';
+import { SignalRService } from 'src/app/services/common/signalR.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,12 +13,18 @@ import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
 })
 export class DashboardComponent extends BaseComponent implements OnInit {
 
-  constructor(spinner: NgxSpinnerService) {
+  constructor(spinner: NgxSpinnerService, private aletrtify: AlertifyService, private signalRService:SignalRService) {
     super(spinner)
+    signalRService.start(HubUrls.ProductHub)
    }
 
   ngOnInit(): void {
-    // this.showSpinner(SpinnerType.BallScaleMultiple)
+    this.signalRService.on(ReciveFunctions.ProductAddedMessageReceiveFunction, message =>{
+      this.aletrtify.message(message,{
+        messageType: MessageType.Notify,
+        position: Position.TopRight
+      })
+    })
   }
 
 }

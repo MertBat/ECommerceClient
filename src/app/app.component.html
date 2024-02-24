@@ -30,7 +30,7 @@
               class="nav-link active"
               aria-current="page"
               routerLink="register"
-              *ngIf="!authService.isAuthhenticated"
+              *ngIf="!authService.isAuthenticated"
               >Register</a
             >
           </li>
@@ -39,7 +39,7 @@
               class="nav-link active"
               aria-current="page"
               routerLink="login"
-              *ngIf="!authService.isAuthhenticated"
+              *ngIf="!authService.isAuthenticated"
               >Login</a
             >
           </li>
@@ -48,7 +48,7 @@
               class="nav-link active"
               aria-current="page"
               style="background-color: red; color: white; cursor: pointer;"
-              *ngIf="authService.isAuthhenticated"
+              *ngIf="authService.isAuthenticated"
               (click)="signOut()"
               >Logout</a
             >
@@ -72,7 +72,7 @@
               class="nav-link active text-success"
               aria-disabled="true"
               routerLink="admin"
-              *ngIf="authService.isAuthhenticated"
+              *ngIf="authService.isAuthenticated"
               >Admin</a
             >
           </li>

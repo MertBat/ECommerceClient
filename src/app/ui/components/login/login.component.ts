@@ -1,5 +1,6 @@
 import {
   FacebookLoginProvider,
+  GoogleLoginProvider,
   SocialAuthService,
   SocialUser,
 } from '@abacritt/angularx-social-login';
@@ -33,14 +34,14 @@ export class LoginComponent extends BaseComponent implements OnInit {
     super(spinner);
     this.socialAuthService.authState.subscribe(async (user: SocialUser) => {
       this.showSpinner(SpinnerType.BallScaleMultiple);
-
+      console.log(user.provider)
       switch (user.provider) {
         case 'GOOGLE':
           await this.userAuthService.googleLogin(user, () => {
             this.authService.identityCheck();
             this.hideSpinner(SpinnerType.BallScaleMultiple);
             this.activatedRoute.queryParams.subscribe((params) => {
-              const returnUrl = params['returnUrl'] || '/products';
+              const returnUrl = params['returnUrl'] ?? '/products';
               this.router.navigateByUrl(returnUrl);
             });
           });
@@ -50,7 +51,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
             this.authService.identityCheck();
             this.hideSpinner(SpinnerType.BallScaleMultiple);
             this.activatedRoute.queryParams.subscribe((params) => {
-              const returnUrl = params['returnUrl'] || '/products';
+              const returnUrl = params['returnUrl'] ?? '/products';
               this.router.navigateByUrl(returnUrl);
             });
           });

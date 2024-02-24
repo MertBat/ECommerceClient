@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from './services/common/auth.service';
 import { CustomToastrService, ToastrMessageType, ToastrPosition } from './services/ui/custom-toastr.service';
 import { Route, Router } from '@angular/router';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 declare var $:any
 
 @Component({
@@ -11,16 +12,17 @@ declare var $:any
 })
 export class AppComponent {
   
-  constructor(public authService:AuthService, private toasterService:CustomToastrService, private router:Router){
+  constructor(public authService:AuthService, private toastrService:CustomToastrService, private router:Router){
     authService.identityCheck();
   }
 
-  signOut(){
-    this.authService.logOut();
-    this.toasterService.message("Account Successfuly Logout", "Logout",{
-      position: ToastrPosition.TopRight,
-      messageType: ToastrMessageType.Info
-    })
-    this.router.navigate(['login']);
+  signOut() {
+    localStorage.removeItem("accessToken");
+    this.authService.identityCheck();
+    this.router.navigate([""]);
+    this.toastrService.message("Oturum kapatılmıştır!", "Oturum Kapatıldı", {
+      messageType: ToastrMessageType.Warning,
+      position: ToastrPosition.TopRight
+    });
   }
 }

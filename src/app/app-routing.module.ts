@@ -10,7 +10,7 @@ const routes: Routes = [
     path: 'admin',
     component: LayoutComponent,
     children: [
-      { path: '', component: DashboardComponent },
+      { path: '', component: DashboardComponent},
       {
         path: 'customers',
         loadChildren: () =>

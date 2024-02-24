@@ -1,3 +1,4 @@
+import { ContentObserver } from '@angular/cdk/observers';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
@@ -19,19 +20,13 @@ export class AuthService {
       expired = true;
     }
     
-    _isAuthenticated = token && !expired
+    _isAuthenticated = token != null && !expired;
+    console.log(_isAuthenticated);
   }
 
-  logOut(){
-    localStorage.removeItem("accessToken");
-    this.identityCheck();
-  }
-
-  get isAuthhenticated(): boolean{
+  get isAuthenticated(): boolean {
     return _isAuthenticated;
   }
-  
 }
 
-
-export let _isAuthenticated: boolean
+export let _isAuthenticated: boolean;
