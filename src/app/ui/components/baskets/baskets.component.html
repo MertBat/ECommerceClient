@@ -1,1 +1,54 @@
-<p>baskets works!</p>
+
+  <div class="modal-header">
+    <h3 class="modal-title" id="exampleModalLabel">My Basket</h3>
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="modal"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <table class="table align-middle text-center">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Quantity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let basketItem of basketItems; index as i">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{ basketItem.name }}</td>
+          <td>{{ basketItem.price }}</td>
+          <td>
+            <div class="row justify-content-center align-items-center">
+              <a
+                [class]="
+                  'arrow-left ' +
+                  (basketItem.quantity === 1 ? 'disabled' : 'enabled')
+                "
+                (click)="decreaseQuantity(basketItem)"
+              ></a>
+              <input
+                class="count-input"
+                type="text"
+                [value]="basketItem.quantity"
+                disabled
+              />
+              <a class="arrow-right" (click)="increaseQuantity(basketItem)"></a>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="modal-footer border-0">
+    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+      Close
+    </button>
+    <button type="button" class="btn btn-success">Done</button>
+  </div>
+

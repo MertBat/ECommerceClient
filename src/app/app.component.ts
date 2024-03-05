@@ -1,28 +1,45 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from './services/common/auth.service';
-import { CustomToastrService, ToastrMessageType, ToastrPosition } from './services/ui/custom-toastr.service';
-import { Route, Router } from '@angular/router';
-import { SocialAuthService } from '@abacritt/angularx-social-login';
-declare var $:any
+import {
+  CustomToastrService,
+  ToastrMessageType,
+  ToastrPosition,
+} from './services/ui/custom-toastr.service';
+import { ComponentName, DynamicLoadComponentService } from './services/common/dynamic-load-component.service';
+import { DynamicLoadComponentDirective } from './directives/common/dynamic-load-component.directive';
+declare var $: any;
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  
-  constructor(public authService:AuthService, private toastrService:CustomToastrService, private router:Router){
+  @ViewChild(DynamicLoadComponentDirective,{static: true})
+  dynamicLoadComponentDirective : DynamicLoadComponentDirective;
+
+  constructor(
+    public authService: AuthService,
+    private toastrService: CustomToastrService,
+    private router: Router,
+    private dynamicLoadComponentService:DynamicLoadComponentService
+  ) {
     authService.identityCheck();
   }
 
   signOut() {
-    localStorage.removeItem("accessToken");
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
     this.authService.identityCheck();
-    this.router.navigate([""]);
-    this.toastrService.message("Oturum kapatılmıştır!", "Oturum Kapatıldı", {
+    this.router.navigate(['']);
+    this.toastrService.message('Oturum kapatılmıştır!', 'Oturum Kapatıldı', {
       messageType: ToastrMessageType.Warning,
-      position: ToastrPosition.TopRight
+      position: ToastrPosition.TopRight,
     });
+  }
+
+  loadComponent() {
+    this.dynamicLoadComponentService.loadComponent(ComponentName.BasketsComponent, this.dynamicLoadComponentDirective.viewContainerRef);
   }
 }

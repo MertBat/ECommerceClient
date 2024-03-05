@@ -1,0 +1,49 @@
+.modal-body {
+  flex: 1;
+}
+
+.arrow-right {
+  width: 0; 
+  height: 0; 
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-left: 12px solid green;
+  cursor: pointer;
+}
+
+.arrow-right:hover {
+  border-left: 12px solid rgb(1, 90, 1);
+}
+
+.arrow-left {
+  width: 0; 
+  height: 0; 
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent; 
+  cursor: pointer;
+}
+
+.enabled{
+  border-right:12px solid green;
+}
+
+.disabled{
+  border-right:12px solid rgb(173, 3, 3);
+}
+
+.enabled:hover{
+  border-right: 12px solid rgb(1, 90, 1);
+}
+
+.count-input{
+  width: 30px;
+  padding: 0;
+  border-right: none;
+  border-left: none;
+  border-color: rgba(0, 128, 0, 0.185);
+  outline: none;
+  text-align: center;
+}
+
+
+

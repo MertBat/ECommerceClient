@@ -1,0 +1,23 @@
+.card {
+   float: left;
+   margin-right: 25px;
+   margin-bottom: 25px;
+   height: 400px;
+   width: 21%;
+   min-width: 15rem;
+}
+
+.card-img-top{
+   height: 270px;
+   object-fit: cover;
+}
+
+.pagination-product {
+   width: 100%;
+   display: flex;
+   justify-content: center;
+}
+
+.nav-link:hover{
+   color: rgb(48, 65, 14);
+}

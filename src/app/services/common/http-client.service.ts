@@ -19,22 +19,6 @@ export class HttpClientService {
     }`;
   }
 
-  // get<T>(
-  //   requestParemeters: Partial<RequestParameters>,
-  //   id?: string
-  // ): Observable<T> {
-  //   let url: string = '';
-  //   if (requestParemeters.fullEndPoint) {
-  //     url = requestParemeters.fullEndPoint;
-  //   } else {
-  //     url = `${this.url(requestParemeters)}${id ? `/${id}` : ''}
-  //     ${
-  //       requestParemeters.queryString ? `?${requestParemeters.queryString}` : ''
-  //     }`;
-  //   }
-  //   return this.httpClient.get<T>(url, { headers: requestParemeters.headers });
-  // }
-
   get<T>(
     requestParameter: Partial<RequestParameters>,
     id?: string

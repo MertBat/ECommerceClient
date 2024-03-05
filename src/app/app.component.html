@@ -1,7 +1,7 @@
 <div>
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar</a>
+      <a class="navbar-brand" href="#">E-commerce</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -18,11 +18,6 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" routerLink="products"
               >Products</a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="basket"
-              >Basket</a
             >
           </li>
           <li class="nav-item">
@@ -47,7 +42,7 @@
             <a
               class="nav-link active"
               aria-current="page"
-              style="background-color: red; color: white; cursor: pointer;"
+              style="background-color: red; color: white; cursor: pointer"
               *ngIf="authService.isAuthenticated"
               (click)="signOut()"
               >Logout</a
@@ -77,21 +72,37 @@
             >
           </li>
         </ul>
-        <form class="d-flex" role="search">
-          <input
-            class="form-control me-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+        <div class="d-flex">
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+            (click)="loadComponent()"
+          >
+            Basket
+          </button>
+        </div>
       </div>
     </div>
   </nav>
-  <div class="mx-4"><router-outlet></router-outlet></div>
+  <div class="content"><router-outlet></router-outlet></div>
 </div>
 
 <ngx-spinner name="s1" type="ball-spin-clockwise-fade-rotating"></ngx-spinner>
 <ngx-spinner name="s2" type="ball-atom"></ngx-spinner>
 <ngx-spinner name="s3" type="ball-scale-multiple"></ngx-spinner>
+
+<div
+  class="modal fade right"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-right">
+    <div class="modal-content">
+      <ng-template appDynamicLoadComponent style="height: 100%;"></ng-template>
+    </div>
+  </div>
+</div>

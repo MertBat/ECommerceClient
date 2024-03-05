@@ -25,6 +25,7 @@ export class SelectProductImageDialogComponent
   implements OnInit
 {
   images: List_Product_Image[];
+  defaultImagePath = "../../../assets/default-box.jpg"
 
   constructor(
     dialogRef: MatDialogRef<SelectProductImageDialogComponent>,
@@ -76,6 +77,17 @@ export class SelectProductImageDialogComponent
         ;
       },
     });
+  }
+
+  showcase(imageId:string){
+    this.spinner.show(SpinnerType.BallAtom);
+    this.productService.changeShowcaseImage(imageId, this.data  as string,()=>{
+      this.spinner.hide(SpinnerType.BallAtom);
+    })
+  }
+  
+  setDefaultImage(e:any){
+    e.target.src = this.defaultImagePath;
   }
 }
 
