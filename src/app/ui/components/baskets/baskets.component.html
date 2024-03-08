@@ -49,6 +49,6 @@
     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
       Close
     </button>
-    <button type="button" class="btn btn-success">Done</button>
+    <button type="button" class="btn btn-success" (click)="shoppingComplete()" [disabled]="basketItems.length == 0">Done</button>
   </div>
 

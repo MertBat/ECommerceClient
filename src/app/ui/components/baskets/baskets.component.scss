@@ -36,14 +36,16 @@
 }
 
 .count-input{
-  width: 30px;
+  width: 18px;
   padding: 0;
-  border-right: none;
-  border-left: none;
   border-color: rgba(0, 128, 0, 0.185);
   outline: none;
   text-align: center;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  margin-right: 3px;
+  margin-left: 3px;
 }
-
 
 

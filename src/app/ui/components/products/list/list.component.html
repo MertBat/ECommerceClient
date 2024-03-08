@@ -1,23 +1,30 @@
 <div class="container" *ngFor="let product of products">
-  <div class="card col-lg-4">
-    <a (click)="addToBasket(product)" class="page-link">
+  <a
+    class="card col-lg-4 link-underline link-underline-opacity-0"
+    (click)="addToBasket(product)"
+    (mouseenter)="slaytShow($event, product.id)"
+    (mouseleave)="slaytShowEnd($event, product.id)"
+    matTooltip="Click to add Basket"
+  >
+    <div>
       <img
+        #imageElement
         [src]="product.imagePath"
         class="card-img-top"
         [alt]="product.name"
         (error)="setDefaultImage($event)"
       />
-    </a>
+    </div>
     <div class="card-body">
       <h5 class="card-title text-uppercase text-center">{{ product.name }}</h5>
-      <a (click)="addToBasket(product)" class="page-link mt-3 text-lg-center">
+      <div class="mt-3 text-lg-center">
         <h1 class="text-success mb-1">
           {{ product.price | currency : "₺" }} | {{ product.stock }}
         </h1>
         <p>Stock: {{ product.stock }}</p>
-      </a>
+      </div>
     </div>
-  </div>
+  </a>
 </div>
 <div class="container pagination-product" *ngIf="totalCount">
   <nav aria-label="Page navigation example">

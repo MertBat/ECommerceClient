@@ -5,6 +5,7 @@
 
 .modal {
     top: 0;
+    z-index: 1052 !important;
 }
 
 .modal.fade:not(.in).right .modal-dialog {
@@ -26,8 +27,12 @@
     margin-bottom: 0;
 }
 
-.modal-content{
+.modal-content {
     display: flex;
     flex-direction: column;
     height: 100%;
-  }
+}
+
+::ng-deep .cdk-overlay-container {
+    z-index: 1053 !important;
+}

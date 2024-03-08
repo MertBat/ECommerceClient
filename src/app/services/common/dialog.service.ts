@@ -17,6 +17,7 @@ export class DialogService {
       height: dialogParameters.options?.height,
       position: dialogParameters.options?.position,
       data: dialogParameters.data,
+      panelClass: "warning-dialog"
     });
 
     dialogRef.afterClosed().subscribe(result => {

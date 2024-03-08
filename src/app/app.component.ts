@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from './services/common/auth.service';
+import { AuthService, _isAuthenticated } from './services/common/auth.service';
 import {
   CustomToastrService,
   ToastrMessageType,

@@ -1,9 +1,11 @@
+import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
 import { Create_Basket_Item } from 'src/app/contracts/basket/create_basket_item';
 import { List_Product } from 'src/app/contracts/list_product';
+import { List_Product_Image } from 'src/app/contracts/list_product_image';
 import { BasketService } from 'src/app/services/common/models/basket.service';
 import { ProductService } from 'src/app/services/common/models/product.service';
 import {
@@ -16,15 +18,19 @@ import {
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss'],
+  styleUrls: ['./list.component.scss']
 })
 export class ListComponent extends BaseComponent implements OnInit {
   defaultImageUrl = '../../../../../assets/default-box.png';
   products: List_Product[];
+  productsWithImages: List_Product[];
   currentPageNo: number;
   totalCount: number;
   totalPageCount: number;
   pageList: number[] = [];
+  imageCounter: number = 0;
+  defaultImagePath:string = ""
+  intervalId: any;
 
   constructor(
     private productService: ProductService,
@@ -56,9 +62,9 @@ export class ListComponent extends BaseComponent implements OnInit {
             });
           }
         );
-      this.products = data.products;
+      this.productsWithImages = data.products;
 
-      this.products = this.products.map<List_Product>((p) => {
+      this.products = this.productsWithImages.map<List_Product>((p) => {
         const listProduct: List_Product = {
           name: p.name,
           id: p.id,
@@ -105,7 +111,7 @@ export class ListComponent extends BaseComponent implements OnInit {
       const productImageFile = product.productImageFiles.filter(
         (item) => item.showcase == true
       );
-      console.log(productImageFile);
+
       if (productImageFile.length != 0) {
         return productImageFile[0].path;
       }
@@ -125,6 +131,35 @@ export class ListComponent extends BaseComponent implements OnInit {
       messageType: ToastrMessageType.Success,
       position: ToastrPosition.TopRight,
     });
+  }
+
+  startCounter(imageElement: HTMLImageElement,imageFiles: List_Product_Image[]) 
+  {
+    this.intervalId = setInterval(() => {
+      imageElement.src = imageFiles[this.imageCounter].path;
+      this.imageCounter++;
+      if (this.imageCounter == imageFiles.length) 
+        this.imageCounter = 0;
+    }, 2000);
+  }
+
+  slaytShow(e: any, productId:string) {
+    const imgElement = (e.target as HTMLElement).querySelector('img');
+    const filteredProduct:List_Product = this.productsWithImages.filter((item)=> item.id == productId)[0]
+    if (filteredProduct.productImageFiles.length > 1){
+      this.defaultImagePath = imgElement.src;
+      this.startCounter(imgElement, filteredProduct.productImageFiles);
+    }
+  }
+
+  slaytShowEnd(e: any, productId:string) {
+    const filteredProduct:List_Product = this.productsWithImages.filter((item)=> item.id == productId)[0]
+    if (filteredProduct.productImageFiles.length > 1){
+      clearInterval(this.intervalId);
+      (e.target as HTMLElement).querySelector('img').src = this.defaultImagePath;
+      this.imageCounter = 0;
+    }
+    
   }
 
   setDefaultImage(e: any) {
