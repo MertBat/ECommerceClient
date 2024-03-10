@@ -76,8 +76,4 @@ export class ListComponent extends BaseComponent implements OnInit{
   async pageChanged(){
     await this.getProducts();
   }
-
-  delete(id, event){
-
-  }
 }

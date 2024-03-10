@@ -4,7 +4,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
 import { List_Basket_Item } from 'src/app/contracts/basket/list_basket_item';
 import { Update_Basket_Item } from 'src/app/contracts/basket/update_basket_item';
-import { CreateOrder } from 'src/app/contracts/order/create_order';
+import { Create_Order } from 'src/app/contracts/order/create_order';
 import {
   BasketItemDeleteState,
   BasketItemRemoveDialogComponent,
@@ -104,7 +104,7 @@ export class BasketsComponent extends BaseComponent implements OnInit {
       data: ShoppingCompleteState.Yes,
       afterClosed: async() => {
         this.showSpinner(SpinnerType.BallAtom);
-        const order: CreateOrder = {
+        const order: Create_Order = {
           address: "address",
           description: "description",
         };

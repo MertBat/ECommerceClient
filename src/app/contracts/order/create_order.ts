@@ -1,4 +1,4 @@
-export class CreateOrder {
+export class Create_Order {
     address: string;
     description: string;
 }
