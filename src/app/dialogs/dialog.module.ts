@@ -12,6 +12,9 @@ import { BasketItemRemoveDialogComponent } from './basket-item-remove-dialog/bas
 import { BasketShoppingCompleteDialogComponent } from './basket-shopping-complete-dialog/basket-shopping-complete-dialog.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { OrderDetailDialogComponent } from './order-detail-dialog/order-detail-dialog.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatListModule } from '@angular/material/list';
 
 
 @NgModule({
@@ -19,7 +22,8 @@ import { MatInputModule } from '@angular/material/input';
     DeleteDialogComponent,
     SelectProductImageDialogComponent,
     BasketItemRemoveDialogComponent,
-    BasketShoppingCompleteDialogComponent
+    BasketShoppingCompleteDialogComponent,
+    OrderDetailDialogComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +33,9 @@ import { MatInputModule } from '@angular/material/input';
     MatCardModule,
     FormsModule,
     MatFormFieldModule,
-    MatInputModule 
+    MatInputModule,
+    MatTableModule,
+    MatListModule 
   ]
 })
 export class DialogModule { }

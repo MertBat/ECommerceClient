@@ -1,0 +1,64 @@
+<h1 mat-dialog-title>Order Details</h1>
+<mat-dialog-content class="mat-typography">
+  <mat-list role="list">
+    <mat-list-item role="listitem">
+      <span style="font-weight: 500">Order No:</span>
+      {{ singleOrder.orderCode }}
+    </mat-list-item>
+    <mat-list-item role="listitem">
+      <span style="font-weight: 500">Address:</span>
+      {{ singleOrder.address }}
+    </mat-list-item>
+    <mat-list-item role="listitem">
+      <span style="font-weight: 500">Desctiption:</span>
+      {{ singleOrder.description }}
+    </mat-list-item>
+    <mat-list-item role="listitem">
+      <span style="font-weight: 500">Order Price:</span>
+      {{orderPrice | currency : "₺"}}
+    </mat-list-item>
+  </mat-list>
+
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    class="mat-elevation-z8 order-detail-table"
+  >
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef>Price</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.price | currency : "₺" }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="quantity">
+      <th mat-header-cell *matHeaderCellDef>Quantity</th>
+      <td mat-cell *matCellDef="let element">{{ element.quantity }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="totalPrice">
+      <th mat-header-cell *matHeaderCellDef>Total Price</th>
+      <td mat-cell *matCellDef="let element" style="font-weight: 500">
+        {{ element.price * element.quantity | currency : "₺" }}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+      mat-row
+      (click)="clickedRows.add(row)"
+      [class.order-detail-row-is-clicked]="clickedRows.has(row)"
+      *matRowDef="let row; columns: displayedColumns"
+    ></tr>
+  </table>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="close()">Close</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Approved</button>
+</mat-dialog-actions>
