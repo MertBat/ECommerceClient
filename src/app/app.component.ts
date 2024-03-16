@@ -8,6 +8,7 @@ import {
 } from './services/ui/custom-toastr.service';
 import { ComponentName, DynamicLoadComponentService } from './services/common/dynamic-load-component.service';
 import { DynamicLoadComponentDirective } from './directives/common/dynamic-load-component.directive';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 declare var $: any;
 
 @Component({
@@ -23,7 +24,8 @@ export class AppComponent {
     public authService: AuthService,
     private toastrService: CustomToastrService,
     private router: Router,
-    private dynamicLoadComponentService:DynamicLoadComponentService
+    private dynamicLoadComponentService:DynamicLoadComponentService,
+    private socialAuthService: SocialAuthService
   ) {
     authService.identityCheck();
   }
@@ -31,6 +33,7 @@ export class AppComponent {
   signOut() {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
+    this.socialAuthService.signOut();
     this.authService.identityCheck();
     this.router.navigate(['']);
     this.toastrService.message('Oturum kapatılmıştır!', 'Oturum Kapatıldı', {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClientService } from '../http-client.service';
 import { SocialUser } from '@abacritt/angularx-social-login';
-import { Observable, firstValueFrom } from 'rxjs';
+import { Observable, firstValueFrom, observable } from 'rxjs';
 import { TokenResponse } from 'src/app/contracts/token/tokenResponse';
 import { LoginProduct } from 'src/app/contracts/users/login_product';
 import {
@@ -125,5 +125,32 @@ export class UserAuthService {
     } catch {
       callback(false);
     }
+  }
+
+  async passwordReset(email: string, callback?: () => void) {
+    const passwordResetObservable: Observable<any> = this.httpService.post(
+      {
+        controller: 'auth',
+        action: 'password-reset',
+      },
+      { email: email }
+    );
+
+    await firstValueFrom(passwordResetObservable);
+    callback();
+  }
+
+  async verifyResetToken(resetToken: string, userId: string): Promise<boolean> {
+    const verifyObservable: Observable<any> = this.httpService.post(
+      {
+        controller: 'auth',
+        action: 'verify-reset-token',
+      },
+      {
+        resetToken: resetToken,
+        userId: userId,
+      }
+    );
+    return await firstValueFrom(verifyObservable);
   }
 }

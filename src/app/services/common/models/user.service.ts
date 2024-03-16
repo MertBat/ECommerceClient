@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable, firstValueFrom } from 'rxjs';
+import { Observable, firstValueFrom, observable } from 'rxjs';
 import { User } from 'src/app/entities/user';
 import { Create_User } from '../../../contracts/users/create_user';
-import {
-  CustomToastrService
-} from '../../ui/custom-toastr.service';
+import { CustomToastrService } from '../../ui/custom-toastr.service';
 import { HttpClientService } from '../http-client.service';
 
 @Injectable({
@@ -27,5 +25,28 @@ export class UserService {
     );
 
     return (await firstValueFrom(observable)) as Create_User;
+  }
+
+  async updatePassword(
+    userId: string,
+    resetToken: string,
+    password: string,
+    confirmpassword: string,
+    successCallBack?: ()=> void,
+    errırCallBack?: (error)=> void
+  ) {
+    const updatePasswordObservable: Observable<any> = this.httpService.post(
+      {
+        controller: 'users',
+        action: 'update-password',
+      },
+      {
+        userId: userId,
+        resetToken: resetToken,
+        newpassword: password,
+        passwordConfirm: confirmpassword,
+      }
+    );
+   return await firstValueFrom(updatePasswordObservable);
   }
 }

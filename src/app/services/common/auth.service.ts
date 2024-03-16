@@ -21,7 +21,6 @@ export class AuthService {
     }
     
     _isAuthenticated = token != null && !expired;
-    console.log(_isAuthenticated);
   }
 
   get isAuthenticated(): boolean {

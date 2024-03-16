@@ -5,6 +5,10 @@ import { HomeModule } from './home/home.module';
 import { BasketsModule } from './baskets/baskets.module';
 import { RegisterModule } from './register/register.module';
 import { LoginModule } from './login/login.module';
+import { PasswordResetComponent } from './password-reset/password-reset.component';
+import { PasswordResetModule } from './password-reset/password-reset.module';
+import { UpdatePasswordComponent } from './update-password/update-password.component';
+import { UpdatePasswordModule } from './update-password/update-password.module';
 
 
 
@@ -16,7 +20,8 @@ import { LoginModule } from './login/login.module';
     HomeModule,
     BasketsModule,
     RegisterModule,
-    //LoginModule
+    PasswordResetModule,
+    UpdatePasswordModule
   ],
   exports:[
     BasketsModule

@@ -23,8 +23,8 @@ export class ListComponent extends BaseComponent implements OnInit {
     'address',
     'description',
     'createdDate',
-    'delete',
     'viewDetail',
+    'delete',
   ];
   dataSource: MatTableDataSource<List_Order> = null;
   @ViewChild(MatPaginator) paginator: MatPaginator;

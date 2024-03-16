@@ -10,29 +10,33 @@ const routes: Routes = [
     path: 'admin',
     component: LayoutComponent,
     children: [
-      { path: '', component: DashboardComponent},
+      { path: '', component: DashboardComponent },
       {
         path: 'customers',
         loadChildren: () =>
           import('./admin/components/customer/customer.module').then(
             (module) => module.CustomerModule
-          ), canActivate: [AuthGuard]
+          ),
+        canActivate: [AuthGuard],
       },
       {
         path: 'products',
         loadChildren: () =>
           import('./admin/components/products/products.module').then(
             (module) => module.ProductsModule
-          ), canActivate: [AuthGuard]
-      }, 
+          ),
+        canActivate: [AuthGuard],
+      },
       {
         path: 'orders',
         loadChildren: () =>
           import('./admin/components/order/order.module').then(
             (module) => module.OrderModule
-          ), canActivate: [AuthGuard]
+          ),
+        canActivate: [AuthGuard],
       },
-    ], canActivate: [AuthGuard]
+    ],
+    canActivate: [AuthGuard],
   },
   { path: '', component: HomeComponent },
   {
@@ -68,6 +72,20 @@ const routes: Routes = [
     loadChildren: () =>
       import('./ui/components/login/login.module').then(
         (module) => module.LoginModule
+      ),
+  },
+  {
+    path: 'password-reset',
+    loadChildren: () =>
+      import('./ui/components/password-reset/password-reset.module').then(
+        (module) => module.PasswordResetModule
+      ),
+  },
+  {
+    path: 'update-password/:userId/:resetToken',
+    loadChildren: () =>
+      import('./ui/components/update-password/update-password.module').then(
+        (module) => module.UpdatePasswordModule
       ),
   },
 ];

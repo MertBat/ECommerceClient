@@ -4,7 +4,7 @@ import {
   SocialAuthService,
   SocialUser,
 } from '@abacritt/angularx-social-login';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -18,7 +18,7 @@ import { UserAuthService } from 'src/app/services/common/models/user-auth.servic
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent extends BaseComponent implements OnInit {
+export class LoginComponent extends BaseComponent implements OnInit, OnDestroy {
   frm: FormGroup;
   submitted: boolean = false;
 
@@ -34,7 +34,6 @@ export class LoginComponent extends BaseComponent implements OnInit {
     super(spinner);
     this.socialAuthService.authState.subscribe(async (user: SocialUser) => {
       this.showSpinner(SpinnerType.BallScaleMultiple);
-      console.log(user.provider)
       switch (user.provider) {
         case 'GOOGLE':
           await this.userAuthService.googleLogin(user, () => {
@@ -67,6 +66,10 @@ export class LoginComponent extends BaseComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(){
+    this.authService.identityCheck();
+  }
+  
   get component() {
     return this.frm.controls;
   }
@@ -89,5 +92,17 @@ export class LoginComponent extends BaseComponent implements OnInit {
 
   facebookLogin() {
     this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
+  }
+
+  googleLogin(){
+    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID)
+      .then((user) => {
+        // You can handle the user data here
+        console.log(user);
+      })
+      .catch(err => {
+        // Handle error
+        console.error(err);
+      });
   }
 }

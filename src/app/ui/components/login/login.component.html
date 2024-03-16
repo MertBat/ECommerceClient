@@ -1,45 +1,57 @@
 <div class="register">
-    <form [formGroup]="frm" (ngSubmit)="onSubmit(frm.value)">
-      <div class="mb-3">
-        <label for="userName" class="form-label">User Name or E-Mail</label>
-        <input
-          type="text"
-          class="form-control"
-          id="userName"
-          placeholder="User name"
-          aria-describedby="emailHelp"
-          formControlName="userNameOrEmail"
-          [ngClass]="{ 'is-invalid': submitted && component.userNameOrEmail.errors }"
-        />
-        <small
-          class="form-text text-muted"
-          *ngIf="submitted && component.userNameOrEmail.errors?.required"
-        >
-          Please enter userName
-        </small>
-      </div>
-      <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
-        <input
-          type="password"
-          class="form-control"
-          id="password"
-          placeholder="Password"
-          formControlName="password"
-          [ngClass]="{ 'is-invalid': submitted && component.password.errors }"
-        />
-        <small
-          class="form-text text-muted"
-          *ngIf="submitted && component.password.errors?.required"
-        >
-          Please enter password
-        </small>
-      </div>
-      <button type="submit" class="btn btn-primary">Login</button>
-    </form>
-  </div>
+  <form [formGroup]="frm" (ngSubmit)="onSubmit(frm.value)">
+    <div class="mb-3">
+      <label for="userName" class="form-label">User Name or E-Mail</label>
+      <input
+        type="text"
+        class="form-control"
+        id="userName"
+        placeholder="User name"
+        aria-describedby="emailHelp"
+        formControlName="userNameOrEmail"
+        [ngClass]="{
+          'is-invalid': submitted && component.userNameOrEmail.errors
+        }"
+      />
+      <small
+        class="form-text text-muted"
+        *ngIf="submitted && component.userNameOrEmail.errors?.required"
+      >
+        Please enter userName
+      </small>
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        placeholder="Password"
+        formControlName="password"
+        [ngClass]="{ 'is-invalid': submitted && component.password.errors }"
+      />
+      <small
+        class="form-text text-muted"
+        *ngIf="submitted && component.password.errors?.required"
+      >
+        Please enter password
+      </small>
+      <a class="password-forgot" routerLink="/password-reset"
+        >Forgot your password?</a
+      >
+    </div>
+    <button type="submit" class="btn btn-primary w-100 mt-4">Login</button>
+  </form>
+</div>
+<div class="external-login">
+  <asl-google-signin-button
+    shape="rectangular"
+    type="standard"
+    size="medium"
+    logo_alignment="left"
+  ></asl-google-signin-button>
 
-  <asl-google-signin-button></asl-google-signin-button>
-
- <img src="../../../../assets/facebook-icon.png" style="width: 30px; cursor: pointer;" alt="facebook-login" (click)="facebookLogin()" >
-  
+  <button class="loginBtn loginBtn--facebook" (click)="facebookLogin()">
+    Login with Facebook
+  </button>
+</div>
