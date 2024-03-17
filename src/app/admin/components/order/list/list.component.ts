@@ -17,6 +17,7 @@ import { OrderService } from 'src/app/services/common/models/order.service';
 })
 export class ListComponent extends BaseComponent implements OnInit {
   displayedColumns: string[] = [
+    'orderStatus',
     'orderCode',
     'userName',
     'totalPrice',
@@ -70,6 +71,9 @@ export class ListComponent extends BaseComponent implements OnInit {
       data: orderId,
       options:{
         width: '750px'
+      },
+      afterClosed: ()=> {
+        
       }
     })
   }

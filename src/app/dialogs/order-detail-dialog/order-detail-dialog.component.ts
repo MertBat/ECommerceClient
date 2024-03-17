@@ -3,7 +3,14 @@ import { BaseDialog } from '../base/base-dialog';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { OrderService } from 'src/app/services/common/models/order.service';
 import { SingleOrder } from 'src/app/contracts/order/single_order';
-import { AlertifyService } from 'src/app/services/admin/alertify.service';
+import { AlertifyService, MessageType, Position } from 'src/app/services/admin/alertify.service';
+import { DialogService } from 'src/app/services/common/dialog.service';
+import {
+  ComplateOrderItemState,
+  CompleteOrderDialogComponent,
+} from '../complete-order-dialog/complete-order-dialog.component';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { SpinnerType } from 'src/app/base/base.component';
 
 @Component({
   selector: 'app-order-detail-dialog',
@@ -24,19 +31,41 @@ export class OrderDetailDialogComponent
     dialogRef: MatDialogRef<OrderDetailDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: ORderDetailDialogState | string,
     private orderService: OrderService,
+    private dialogService: DialogService,
+    private spinner: NgxSpinnerService,
     private alertifyService: AlertifyService
   ) {
     super(dialogRef);
   }
 
   async ngOnInit(): Promise<void> {
+    this.spinner.show(SpinnerType.BallAtom)
     this.singleOrder = await this.orderService.getOrderById(
       this.data as string
     );
+    this.spinner.hide(SpinnerType.BallAtom)
     this.dataSource = this.singleOrder.basketItems;
     this.orderPrice = this.singleOrder.basketItems
       .map((basketItem) => basketItem.price * basketItem.quantity)
       .reduce((price, current) => price + current);
+  }
+
+  completeOrder() {
+    this.dialogService.openDialog({
+      componentType: CompleteOrderDialogComponent,
+      data: null,
+      afterClosed: async (result) => {
+        this.spinner.show(SpinnerType.BallScaleMultiple)
+        var status = result == ComplateOrderItemState.Yes
+        await this.orderService.completeOrder(this.data as string, status).then(()=>{
+          this.alertifyService.message("Order statue successfully changed",{
+            messageType: MessageType.Success,
+            position: Position.TopRight
+          })
+        })
+        this.spinner.hide(SpinnerType.BallScaleMultiple)
+      }
+    });
   }
 }
 

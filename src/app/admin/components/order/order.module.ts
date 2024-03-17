@@ -13,6 +13,7 @@ import { DeleteDirectiveModule } from 'src/app/directives/admin/delete/delete.di
 import { FileUploadModule } from 'src/app/services/common/file-upload/file-upload.module';
 import { ListComponent } from './list/list.component';
 import { OrderComponent } from './order.component';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [OrderComponent, ListComponent],
@@ -29,6 +30,8 @@ import { OrderComponent } from './order.component';
     DialogModule,
     FileUploadModule,
     DeleteDirectiveModule,
+    MatIconModule,
+    MatTooltipModule
   ],
 })
 export class OrderModule {}

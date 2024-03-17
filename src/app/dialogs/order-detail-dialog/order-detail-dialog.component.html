@@ -1,21 +1,27 @@
 <h1 mat-dialog-title>Order Details</h1>
-<mat-dialog-content class="mat-typography">
+<mat-dialog-content class="mat-typography" *ngIf="singleOrder">
   <mat-list role="list">
     <mat-list-item role="listitem">
-      <span style="font-weight: 500">Order No:</span>
+      <span style="font-weight: 500">Order No:&nbsp;</span>
       {{ singleOrder.orderCode }}
     </mat-list-item>
     <mat-list-item role="listitem">
-      <span style="font-weight: 500">Address:</span>
+      <span style="font-weight: 500">Address:&nbsp;</span>
       {{ singleOrder.address }}
     </mat-list-item>
     <mat-list-item role="listitem">
-      <span style="font-weight: 500">Desctiption:</span>
+      <span style="font-weight: 500">Desctiption:&nbsp;</span>
       {{ singleOrder.description }}
     </mat-list-item>
     <mat-list-item role="listitem">
-      <span style="font-weight: 500">Order Price:</span>
+      <span style="font-weight: 500">Order Price:&nbsp;</span>
       {{orderPrice | currency : "₺"}}
+    </mat-list-item>
+    <mat-list-item role="listitem">
+      <span style="font-weight: 500">Order Status:&nbsp;</span>
+      <span *ngIf="!singleOrder.completed" style="color: #d8871e;">Order waiting</span>
+        <span *ngIf="singleOrder.completed && singleOrder.orderStatus" style="color: #037203"> Order Confirmed</span>
+        <span *ngIf="singleOrder.completed && !singleOrder.orderStatus" style="color: #c50707;">Order Rejected</span>
     </mat-list-item>
   </mat-list>
 
@@ -60,5 +66,5 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button (click)="close()">Close</button>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Approved</button>
+  <button mat-button [mat-dialog-close]="data" (click)="completeOrder()" *ngIf="!singleOrder.completed" cdkFocusInitial>Order approved</button>
 </mat-dialog-actions>

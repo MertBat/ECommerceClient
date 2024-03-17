@@ -21,8 +21,13 @@ export class DialogService {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result == dialogParameters.data)
-        dialogParameters.afterClosed();
+      if(dialogParameters.data == null){
+        if (result !== undefined && result !== null)
+          dialogParameters.afterClosed(result);
+      }else{
+        if (result == dialogParameters.data)
+          dialogParameters.afterClosed();
+      }
     });
   }
 }
@@ -30,7 +35,7 @@ export class DialogService {
 export class DialogParameters {
   componentType: ComponentType<any>;
   data: any;
-  afterClosed: () => void;
+  afterClosed: (data?:any) => void;
   options?: Partial<DialogOptions> = new DialogOptions();
 }
 

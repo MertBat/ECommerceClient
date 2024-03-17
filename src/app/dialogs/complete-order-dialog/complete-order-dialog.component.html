@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>Warning!!!</h1>
+<div mat-dialog-content>
+  <p>Are you sure you want to complete order?</p>
+</div>
+<div mat-dialog-actions>
+<button mat-flat-button style="background-color: #c50707;" [mat-dialog-close]="ComplateOrderItemState.No" cdkFocusInitial>Deny</button>
+  <button mat-flat-button (click)="close()"  style="background-color: #d8871e;">Decide later</button>
+  <button mat-flat-button  style="background-color: #037203;" [mat-dialog-close]="ComplateOrderItemState.Yes" cdkFocusInitial>Complete</button>
+</div>

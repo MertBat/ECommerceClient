@@ -65,9 +65,10 @@ export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
 
             break;
           case HttpStatusCode.InternalServerError:
+            console.log(error.error)
             this.toastrService.message(
-              'Client can not reach the server.',
-              'Server error!',
+              error.error.Message,
+              error.error.Title,
               {
                 messageType: ToastrMessageType.Warning,
                 position: ToastrPosition.BottomFullWidth,

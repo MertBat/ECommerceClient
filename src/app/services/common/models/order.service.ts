@@ -44,16 +44,31 @@ export class OrderService {
     return await promiseData;
   }
 
-  async getOrderById(
-    id: string
-  ):Promise<SingleOrder> {
-    const getByIdObservable: Observable<SingleOrder> = this.httpClientService.get<SingleOrder>(
-      {
-        controller: 'orders',
-      },
-      id
-    );
-    
-    return await firstValueFrom(getByIdObservable);;
+  async getOrderById(id: string): Promise<SingleOrder> {
+    const getByIdObservable: Observable<SingleOrder> =
+      this.httpClientService.get<SingleOrder>(
+        {
+          controller: 'orders',
+        },
+        id
+      );
+
+    return await firstValueFrom(getByIdObservable);
+  }
+
+  async completeOrder(id: string, status: boolean) {
+    const completeOrderObservable: Observable<any> =
+      this.httpClientService.post(
+        {
+          controller: 'orders',
+          action: 'complete-order',
+        },
+        {
+          id: id,
+          orderStatus: status,
+        }
+      );
+
+      await firstValueFrom(completeOrderObservable);
   }
 }
