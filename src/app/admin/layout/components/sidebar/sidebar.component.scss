@@ -1,5 +1,9 @@
-.list {
-    margin: 10px;
+.list a{
+    cursor: pointer;
+}
+
+.list a:hover{
+    background-color: rgba(128, 128, 128, 0.13);
 }
 
 .listitem {
