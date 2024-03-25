@@ -77,7 +77,7 @@ export class DeleteDirective {
                 () => {
                 //  this.element.nativeElement.parentElement
                   this.callBack.emit();
-                  this.alertifyService.message('Product successfully deleted', {
+                  this.alertifyService.message('Successfully deleted', {
                     dismissOthers: true,
                     messageType: MessageType.Success,
                     position: Position.TopRight,

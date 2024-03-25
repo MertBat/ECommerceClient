@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import { FileUploadDialogComponent } from './file-upload-dialog/file-upload-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -7,7 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { SelectProductImageDialogComponent } from './select-product-image-dialog/select-product-image-dialog.component';
 import { FileUploadModule } from '../services/common/file-upload/file-upload.module';
 import {MatCardModule} from '@angular/material/card'; 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BasketItemRemoveDialogComponent } from './basket-item-remove-dialog/basket-item-remove-dialog.component';
 import { BasketShoppingCompleteDialogComponent } from './basket-shopping-complete-dialog/basket-shopping-complete-dialog.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -16,6 +16,10 @@ import { OrderDetailDialogComponent } from './order-detail-dialog/order-detail-d
 import { MatTableModule } from '@angular/material/table';
 import { MatListModule } from '@angular/material/list';
 import { CompleteOrderDialogComponent } from './complete-order-dialog/complete-order-dialog.component';
+import { AuthorizeMenuDialogComponent } from './authorize-menu-dialog/authorize-menu-dialog.component';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -25,7 +29,8 @@ import { CompleteOrderDialogComponent } from './complete-order-dialog/complete-o
     BasketItemRemoveDialogComponent,
     BasketShoppingCompleteDialogComponent,
     OrderDetailDialogComponent,
-    CompleteOrderDialogComponent
+    CompleteOrderDialogComponent,
+    AuthorizeMenuDialogComponent
   ],
   imports: [
     CommonModule,
@@ -37,7 +42,12 @@ import { CompleteOrderDialogComponent } from './complete-order-dialog/complete-o
     MatFormFieldModule,
     MatInputModule,
     MatTableModule,
-    MatListModule 
+    MatListModule,
+    MatChipsModule,
+    ReactiveFormsModule,
+    MatAutocompleteModule,
+    AsyncPipe,
+    MatIconModule,
   ]
 })
 export class DialogModule { }

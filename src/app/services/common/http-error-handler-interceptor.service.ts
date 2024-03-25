@@ -65,7 +65,6 @@ export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
 
             break;
           case HttpStatusCode.InternalServerError:
-            console.log(error.error)
             this.toastrService.message(
               error.error.Message,
               error.error.Title,

@@ -34,7 +34,6 @@ export class PasswordResetComponent extends BaseComponent implements OnInit {
     if (this.frm.invalid) {
       return;
     }
-    console.log(data['email']);
     this.showSpinner(SpinnerType.BallScaleMultiple);
     this.userAuthService.passwordReset(data['email'], () => {
       this.hideSpinner(SpinnerType.BallScaleMultiple);

@@ -1,0 +1,37 @@
+<h1 mat-dialog-title>Manage Endpoint</h1>
+<div mat-dialog-content>
+  <p>Are you sure you want to assign role to <b>{{data.name}}</b>?</p>
+  <form>
+    <mat-form-field class="role-chip-list" appearance="fill">
+      <mat-label>Roles</mat-label>
+      <mat-chip-grid #chipGrid aria-label="Role selection">
+        <mat-chip-row *ngFor="let role of selectedRoles" (removed)="remove(role)">
+          {{role}}
+          <button matChipRemove [attr.aria-label]="'remove ' + role">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip-row>
+      </mat-chip-grid>
+      <input placeholder="New Role..." #roleInput [formControl]="roleCtrl"
+        [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        />
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+        <mat-option *ngFor="let role of filteredRoles | async" [value]="role">
+          {{role}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="close()">No</button>
+  <button
+    mat-button
+    [mat-dialog-close]="data"
+    cdkFocusInitial
+    (click)="assignRoles()"
+  >
+    Yes
+  </button>
+</div>

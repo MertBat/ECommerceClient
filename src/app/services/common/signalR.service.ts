@@ -14,9 +14,6 @@ export class SignalRService {
   //başlatılmış bir hub verir
   start(hubUrl: string) {
     hubUrl = this.baseSignalRUrl + hubUrl;
-    console.log(
-      'Connection exists or is disconnected. Creating new connection...'
-    );
     const builder: HubConnectionBuilder = new HubConnectionBuilder();
 
     const hubConnection: HubConnection = builder

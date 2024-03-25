@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit, Output } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { List_Product_Image } from 'src/app/contracts/list_product_image';
+import { List_Product_Image } from 'src/app/contracts/product/list_product_image';
 import { FileUploadOptions } from 'src/app/services/common/file-upload/file-upload.component';
 import { ProductService } from 'src/app/services/common/models/product.service';
 import { BaseDialog } from '../base/base-dialog';
@@ -71,7 +71,6 @@ export class SelectProductImageDialogComponent
             card.fadeOut(500);
           }
         ), (errorMessage) =>{
-          console.log(errorMessage)
           this.spinner.hide(SpinnerType.BallAtom);
         };
         ;

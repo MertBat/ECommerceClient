@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Create_product } from 'src/app/contracts/create_product';
+import { Create_product } from 'src/app/contracts/product/create_product';
 import { ListComponent } from './list/list.component';
 
 @Component({

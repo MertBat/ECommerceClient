@@ -43,6 +43,14 @@ const routes: Routes = [
           ),
         canActivate: [AuthGuard],
       },
+      {
+        path: 'roles',
+        loadChildren: () =>
+          import('./admin/components/role/role.module').then(
+            (module) => module.RoleModule
+          ),
+        canActivate: [AuthGuard],
+      },
     ],
     canActivate: [AuthGuard],
   },

@@ -4,8 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
 import { Create_Basket_Item } from 'src/app/contracts/basket/create_basket_item';
-import { List_Product } from 'src/app/contracts/list_product';
-import { List_Product_Image } from 'src/app/contracts/list_product_image';
+import { List_Product } from 'src/app/contracts/product/list_product';
+import { List_Product_Image } from 'src/app/contracts/product/list_product_image';
 import { BasketService } from 'src/app/services/common/models/basket.service';
 import { ProductService } from 'src/app/services/common/models/product.service';
 import {

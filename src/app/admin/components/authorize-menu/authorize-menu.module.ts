@@ -17,7 +17,8 @@ import { MatIconModule } from '@angular/material/icon';
     ]),
     MatTreeModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatButtonModule
   ]
 })
 export class AuthorizeMenuModule { }

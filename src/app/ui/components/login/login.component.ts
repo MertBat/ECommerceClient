@@ -97,11 +97,8 @@ export class LoginComponent extends BaseComponent implements OnInit, OnDestroy {
   googleLogin(){
     this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID)
       .then((user) => {
-        // You can handle the user data here
-        console.log(user);
       })
       .catch(err => {
-        // Handle error
         console.error(err);
       });
   }

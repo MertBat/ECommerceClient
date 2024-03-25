@@ -5,6 +5,8 @@ import { CustomerModule } from './customer/customer.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { OrderModule } from './order/order.module';
 import { ProductsModule } from './products/products.module';
+import { RoleComponent } from './role/role.component';
+import { RoleModule } from './role/role.module';
 
 @NgModule({
   declarations: [],
@@ -14,7 +16,8 @@ import { ProductsModule } from './products/products.module';
     OrderModule,
     DashboardModule,
     CustomerModule,
-    AuthorizeMenuModule
+    AuthorizeMenuModule,
+    RoleModule
   ],
 })
 export class ComponentsModule {}

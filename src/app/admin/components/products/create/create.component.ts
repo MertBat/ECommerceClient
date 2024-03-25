@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
-import { Create_product } from 'src/app/contracts/create_product';
+import { Create_product } from 'src/app/contracts/product/create_product';
 import {
   AlertifyService,
   MessageType,
