@@ -30,7 +30,7 @@ import { MatIconModule } from '@angular/material/icon';
     BasketShoppingCompleteDialogComponent,
     OrderDetailDialogComponent,
     CompleteOrderDialogComponent,
-    AuthorizeMenuDialogComponent
+    AuthorizeMenuDialogComponent  
   ],
   imports: [
     CommonModule,

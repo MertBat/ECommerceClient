@@ -28,7 +28,6 @@ export class AuthGuard implements CanActivate {
     this.spinner.show(SpinnerType.BallScaleMultiple);
 
     if (!_isAuthenticated) {
-      debugger;
       this.router.navigate(['login'], {
         queryParams: { returnUrl: state.url },
       });
