@@ -37,19 +37,19 @@ export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
           case HttpStatusCode.Unauthorized:
             const refreshToken = localStorage.getItem('refreshToken');
             this.userAuthService
-              .refreshTokenLogin(refreshToken, (state) => {
-                if (!state) {
-                  const url = this.router.url;
-                  if (url == '/products') {
-                    this.toastrService.message(
-                      'Sign in to add products to cart',
-                      'Warning',
-                      {
-                        messageType: ToastrMessageType.Warning,
-                        position: ToastrPosition.BottomFullWidth,
-                      }
-                    );
-                  } else {
+            .refreshTokenLogin(refreshToken, (state) => {
+              if (!state) {
+                const url = this.router.url;
+                if (url == '/products') {
+                  this.toastrService.message(
+                    'Sign in to add products to cart',
+                    'Warning',
+                    {
+                      messageType: ToastrMessageType.Warning,
+                      position: ToastrPosition.BottomFullWidth,
+                    }
+                  );
+                } else {
                     this.toastrService.message(
                       'You have not authorization.',
                       'UnAuthorized!',
@@ -61,7 +61,16 @@ export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
                   }
                 }
               })
-              .then((data) => {});
+              .then((data) => {
+                this.toastrService.message(
+                  'You have not authorization.',
+                  'UnAuthorized!',
+                  {
+                    messageType: ToastrMessageType.Warning,
+                    position: ToastrPosition.BottomFullWidth,
+                  }
+                );
+              });
 
             break;
           case HttpStatusCode.InternalServerError:

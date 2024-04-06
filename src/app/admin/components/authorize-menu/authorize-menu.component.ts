@@ -5,7 +5,7 @@ import {
   MatTreeFlattener,
 } from '@angular/material/tree';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { BaseComponent } from 'src/app/base/base.component';
+import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
 import { AuthorizeAction } from 'src/app/contracts/authorize-configurations/authorize_action';
 import { AuthorizeMenuDialogComponent } from 'src/app/dialogs/authorize-menu-dialog/authorize-menu-dialog.component';
 import { DialogService } from 'src/app/services/common/dialog.service';
@@ -61,6 +61,7 @@ export class AuthorizeMenuComponent extends BaseComponent implements OnInit {
   }
 
   async ngOnInit() {
+    this.showSpinner(SpinnerType.BallScaleMultiple);
     this.dataSource.data = (
       await this.applicationService.getAuthorizeDefinitionEndPoints()
     ).map((m) => {
@@ -78,18 +79,19 @@ export class AuthorizeMenuComponent extends BaseComponent implements OnInit {
       return treeMenu;
     });
 
+    this.hideSpinner(SpinnerType.BallScaleMultiple);
   }
-
+  
   hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
 
-  assignRole(code: string, name: string, menuName:string) {
+  assignRole(code: string, name: string, menuName: string) {
     this.dialogService.openDialog({
       componentType: AuthorizeMenuDialogComponent,
-      data: { code: code, name: name, menuName:menuName },
+      data: { code: code, name: name, menuName: menuName },
       options: {
         width: '750px',
       },
-      afterClosed: () => {},
+      afterClosed: () => { },
     });
   }
 }

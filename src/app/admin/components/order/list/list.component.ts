@@ -47,14 +47,7 @@ export class ListComponent extends BaseComponent implements OnInit {
     const allOrders:{totalOrderCount: number; orders: List_Order[];} = await this.orderService.getAll(
       this.paginator ? this.paginator.pageIndex : 0, 
       this.paginator ? this.paginator.pageSize : 5, 
-      () => this.hideSpinner(SpinnerType.BallAtom),
-      (errorMessage) =>{
-        this.alertifyService.message(errorMessage, {
-          dismissOthers: true,
-          messageType: MessageType.Error,
-          position: Position.TopRight,
-        })
-      }
+      () => this.hideSpinner(SpinnerType.BallAtom)
     );
 
     this.paginator.length = allOrders.totalOrderCount;
