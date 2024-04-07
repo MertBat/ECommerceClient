@@ -20,6 +20,7 @@ import { AuthorizeMenuDialogComponent } from './authorize-menu-dialog/authorize-
 import {MatChipsModule} from '@angular/material/chips';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatIconModule } from '@angular/material/icon';
+import { QrcodeDialogComponent } from './qrcode-dialog/qrcode-dialog.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { MatIconModule } from '@angular/material/icon';
     BasketShoppingCompleteDialogComponent,
     OrderDetailDialogComponent,
     CompleteOrderDialogComponent,
-    AuthorizeMenuDialogComponent  
+    AuthorizeMenuDialogComponent,
+    QrcodeDialogComponent  
   ],
   imports: [
     CommonModule,

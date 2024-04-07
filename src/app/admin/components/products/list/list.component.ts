@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
 import { List_Product } from 'src/app/contracts/product/list_product';
+import { QrcodeDialogComponent } from 'src/app/dialogs/qrcode-dialog/qrcode-dialog.component';
 import { SelectProductImageDialogComponent } from 'src/app/dialogs/select-product-image-dialog/select-product-image-dialog.component';
 import {
   AlertifyService,
@@ -18,7 +19,7 @@ import { ProductService } from 'src/app/services/common/models/product.service';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
 })
-export class ListComponent extends BaseComponent implements OnInit{
+export class ListComponent extends BaseComponent implements OnInit {
   displayedColumns: string[] = [
     'name',
     'stock',
@@ -26,6 +27,7 @@ export class ListComponent extends BaseComponent implements OnInit{
     'createdDate',
     'updatedDate',
     'photos',
+    'qRCode',
     'edit',
     'delete'
   ];
@@ -40,13 +42,13 @@ export class ListComponent extends BaseComponent implements OnInit{
     super(spinner);
   }
 
-  async getProducts(){
+  async getProducts() {
     this.showSpinner(SpinnerType.BallAtom);
-    const allProducts:{totalCount: number; products: List_Product[];} = await this.productService.read(
-      this.paginator ? this.paginator.pageIndex : 0, 
-      this.paginator ? this.paginator.pageSize : 5, 
+    const allProducts: { totalCount: number; products: List_Product[]; } = await this.productService.read(
+      this.paginator ? this.paginator.pageIndex : 0,
+      this.paginator ? this.paginator.pageSize : 5,
       () => this.hideSpinner(SpinnerType.BallAtom),
-      (errorMessage) =>{
+      (errorMessage) => {
         this.alertifyService.message(errorMessage, {
           dismissOthers: true,
           messageType: MessageType.Error,
@@ -56,24 +58,32 @@ export class ListComponent extends BaseComponent implements OnInit{
     );
 
     this.paginator.length = allProducts.totalCount;
-    this.dataSource = new MatTableDataSource<List_Product>(allProducts.products) 
+    this.dataSource = new MatTableDataSource<List_Product>(allProducts.products)
   }
-  
+
   async ngOnInit() {
     await this.getProducts();
   }
 
-  addProductImages(id: string){
+  addProductImages(id: string) {
     this.dialogService.openDialog({
       componentType: SelectProductImageDialogComponent,
       data: id,
-      options:{
+      options: {
         width: "1400px"
       }
     })
   }
 
-  async pageChanged(){
+  async pageChanged() {
     await this.getProducts();
+  }
+
+  showQRCode(id: string) {
+    this.dialogService.openDialog({
+      componentType: QrcodeDialogComponent,
+      data: id,
+      afterClosed: () => { },
+    })
   }
 }

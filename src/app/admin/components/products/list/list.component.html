@@ -28,38 +28,36 @@
     <ng-container matColumnDef="photos" width="30px">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element">
-        <img style="cursor: pointer;" (click)="addProductImages(element.id)" src="../../../../../assets/fotoAdd.png"  />
+        <img style="cursor: pointer;" (click)="addProductImages(element.id)" src="../../../../../assets/fotoAdd.png" />
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="qRCode" width="30px">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <img style="cursor: pointer;" src="../../../../../assets/qr-code.png" width="25"
+          (click)="showQRCode(element.id)" />
       </td>
     </ng-container>
 
     <ng-container matColumnDef="edit" width="30px">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element">
-        <img style="cursor: pointer;" src="../../../../../assets/edit.png" width="25"/>
+        <img style="cursor: pointer;" src="../../../../../assets/edit.png" width="25" />
       </td>
     </ng-container>
 
     <ng-container matColumnDef="delete" width="30px">
       <th mat-header-cell *matHeaderCellDef></th>
-      <td
-        [id]="element.id"
-        mat-cell
-        *matCellDef="let element"
-        appDelete
-        (callBack)="getProducts()"
-        controller = "products"
-      ></td>
+      <td [id]="element.id" mat-cell *matCellDef="let element" appDelete (callBack)="getProducts()"
+        controller="products"></td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
 
-  <mat-paginator
-    (page)="pageChanged()"
-    [pageSizeOptions]="[5, 10, 20]"
-    showFirstLastButtons
-    aria-label="Select page of periodic elements"
-  >
+  <mat-paginator (page)="pageChanged()" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+    aria-label="Select page of periodic elements">
   </mat-paginator>
 </div>
