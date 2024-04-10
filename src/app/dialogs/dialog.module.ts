@@ -21,6 +21,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { MatIconModule } from '@angular/material/icon';
 import { QrcodeDialogComponent } from './qrcode-dialog/qrcode-dialog.component';
+import { ProductUpdateDialogComponent } from './product-update-dialog/product-update-dialog.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { QrcodeDialogComponent } from './qrcode-dialog/qrcode-dialog.component';
     OrderDetailDialogComponent,
     CompleteOrderDialogComponent,
     AuthorizeMenuDialogComponent,
-    QrcodeDialogComponent  
+    QrcodeDialogComponent,
+    ProductUpdateDialogComponent  
   ],
   imports: [
     CommonModule,

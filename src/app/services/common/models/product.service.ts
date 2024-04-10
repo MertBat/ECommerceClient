@@ -5,12 +5,13 @@ import { Create_product } from 'src/app/contracts/product/create_product';
 import { List_Product } from 'src/app/contracts/product/list_product';
 import { List_Product_Image } from 'src/app/contracts/product/list_product_image';
 import { HttpClientService } from '../http-client.service';
+import { Get_Product } from 'src/app/contracts/product/get_product';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
-  constructor(private httpClientService: HttpClientService) {}
+  constructor(private httpClientService: HttpClientService) { }
 
   create(product: Create_product, successCallBack?: any, errorCallBack?: any) {
     this.httpClientService
@@ -61,6 +62,31 @@ export class ProductService {
       );
 
     return await promisData;
+  }
+
+  async readById(id: string): Promise<Get_Product> {
+    const readbyIdObservable: Observable<Get_Product> = this.httpClientService.get<Get_Product>(
+      {
+        controller: 'products',
+        action: 'getProductById'
+      },
+      id
+    );
+
+    return await firstValueFrom(readbyIdObservable);
+  }
+
+  async update(id: string, product: Get_Product) {
+    const updateObservable: Observable<any> = this.httpClientService.put({
+      controller: 'products'
+    },
+      {
+        id: id,
+        ...product
+      }
+    )
+
+    await firstValueFrom(updateObservable);
   }
 
   async delete(id: string) {

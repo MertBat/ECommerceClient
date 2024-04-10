@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
 import { List_Product } from 'src/app/contracts/product/list_product';
+import { ProductUpdateDialogComponent } from 'src/app/dialogs/product-update-dialog/product-update-dialog.component';
 import { QrcodeDialogComponent } from 'src/app/dialogs/qrcode-dialog/qrcode-dialog.component';
 import { SelectProductImageDialogComponent } from 'src/app/dialogs/select-product-image-dialog/select-product-image-dialog.component';
 import {
@@ -77,6 +78,19 @@ export class ListComponent extends BaseComponent implements OnInit {
 
   async pageChanged() {
     await this.getProducts();
+  }
+
+  editProduct(id:string){
+    this.dialogService.openDialog({
+      componentType: ProductUpdateDialogComponent,
+      data:id,
+      afterClosed: (lao)=>{
+        console.log(lao)
+      },
+      options:{
+        width: "350px"
+      }
+    })
   }
 
   showQRCode(id: string) {

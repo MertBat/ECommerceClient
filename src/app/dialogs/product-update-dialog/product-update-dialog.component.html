@@ -1,0 +1,26 @@
+<h1 mat-dialog-title>UPdate Product</h1>
+<div mat-dialog-content>
+    <div mat-dialog-content *ngIf="product">
+        <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput [(ngModel)]="product.name">
+            <button matSuffix mat-icon-button aria-label="Clear" (click)="product.name=''" *ngIf="product.name">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Stock</mat-label>
+            <input matInput type="number" [(ngModel)]="product.stock">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Price</mat-label>
+            <input matInput type="number" [(ngModel)]="product.price">
+        </mat-form-field>
+    </div>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="close()">No Thanks</button>
+    <button cdkFocusInitial (click)="onYesClick()" mat-button [mat-dialog-close]="product"
+        [disabled]="this.product.name.trim() == '' || this.product.stock < 0 || this.product.price < 0"
+        *ngIf="product">Ok</button>
+</div>

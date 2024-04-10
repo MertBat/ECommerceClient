@@ -43,7 +43,7 @@
     <ng-container matColumnDef="edit" width="30px">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element">
-        <img style="cursor: pointer;" src="../../../../../assets/edit.png" width="25" />
+        <img style="cursor: pointer;" src="../../../../../assets/edit.png" width="25" (click)="editProduct(element.id)"/>
       </td>
     </ng-container>
 
