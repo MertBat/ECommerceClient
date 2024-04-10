@@ -26,7 +26,7 @@ export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
     private userAuthService: UserAuthService,
     private router: Router,
     private spinner: NgxSpinnerService
-  ) {}
+  ) { }
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
@@ -36,8 +36,7 @@ export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
         switch (error.status) {
           case HttpStatusCode.Unauthorized:
             const refreshToken = localStorage.getItem('refreshToken');
-            this.userAuthService
-            .refreshTokenLogin(refreshToken, (state) => {
+            this.userAuthService.refreshTokenLogin(refreshToken, (state) => {
               if (!state) {
                 const url = this.router.url;
                 if (url == '/products') {
@@ -50,28 +49,17 @@ export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
                     }
                   );
                 } else {
-                    this.toastrService.message(
-                      'You have not authorization.',
-                      'UnAuthorized!',
-                      {
-                        messageType: ToastrMessageType.Warning,
-                        position: ToastrPosition.BottomFullWidth,
-                      }
-                    );
-                  }
+                  this.toastrService.message(
+                    'You have not authorization.',
+                    'UnAuthorized!',
+                    {
+                      messageType: ToastrMessageType.Warning,
+                      position: ToastrPosition.BottomFullWidth,
+                    }
+                  );
                 }
-              })
-              .then((data) => {
-                this.toastrService.message(
-                  'You have not authorization.',
-                  'UnAuthorized!',
-                  {
-                    messageType: ToastrMessageType.Warning,
-                    position: ToastrPosition.BottomFullWidth,
-                  }
-                );
-              });
-
+              }
+            })
             break;
           case HttpStatusCode.InternalServerError:
             this.toastrService.message(

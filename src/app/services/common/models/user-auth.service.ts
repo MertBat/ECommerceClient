@@ -53,7 +53,6 @@ export class UserAuthService {
       );
 
     const tokenResponse = (await firstValueFrom(observable)) as TokenResponse;
-    callback();
     if (tokenResponse) {
       localStorage.setItem('accessToken', tokenResponse.token.accessToken);
       localStorage.setItem('refreshToken', tokenResponse.token.refreshToken);
@@ -67,6 +66,7 @@ export class UserAuthService {
         position: ToastrPosition.TopRight,
       });
     }
+    callback();
   }
 
   async facebookLogin(user: SocialUser, callback?: () => void): Promise<any> {

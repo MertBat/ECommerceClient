@@ -68,7 +68,6 @@ export class ListComponent extends BaseComponent implements OnInit {
   }
 
   async changeRole(role: string, id: string) {
-    console.log(role, id);
     this.showSpinner(SpinnerType.BallScaleMultiple);
     await this.userService.assignRoleToUser(id, role).then(() => {
       this.alertifyService.message('User role successfully changed', {
