@@ -12,14 +12,6 @@ const routes: Routes = [
     children: [
       { path: '', component: DashboardComponent },
       {
-        path: 'customers',
-        loadChildren: () =>
-          import('./admin/components/customer/customer.module').then(
-            (module) => module.CustomerModule
-          ),
-        canActivate: [AuthGuard],
-      },
-      {
         path: 'products',
         loadChildren: () =>
           import('./admin/components/products/products.module').then(

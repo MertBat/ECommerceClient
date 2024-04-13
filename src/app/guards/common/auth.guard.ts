@@ -6,8 +6,9 @@ import {
   RouterStateSnapshot,
 } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { retry } from 'rxjs';
 import { SpinnerType } from 'src/app/base/base.component';
-import { _isAuthenticated } from 'src/app/services/common/auth.service';
+import { _isAuthenticated, _isCompetent } from 'src/app/services/common/auth.service';
 import {
   CustomToastrService,
   ToastrMessageType,
@@ -26,7 +27,6 @@ export class AuthGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     this.spinner.show(SpinnerType.BallScaleMultiple);
-
     if (!_isAuthenticated) {
       this.router.navigate(['login'], {
         queryParams: { returnUrl: state.url },
@@ -39,8 +39,17 @@ export class AuthGuard implements CanActivate {
       return false;
     }
 
-    this.spinner.hide(SpinnerType.BallScaleMultiple);
+    if(!_isCompetent){
+      this.router.navigate(['']);
+      this.toasterService.message('Your account does not have access', 'Unauthorized Access', {
+        messageType: ToastrMessageType.Warning,
+        position: ToastrPosition.TopRight,
+      });
+      this.spinner.hide(SpinnerType.BallScaleMultiple);
+      return false;
+    }
 
+    this.spinner.hide(SpinnerType.BallScaleMultiple);
     return true;
   }
 }

@@ -4,6 +4,12 @@ table {
 
 .mat-elevation-z8 {
   box-shadow: none;
-  width: 40%;
+  width: 100%;
   min-width: 320px;
+}
+
+th, td {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }

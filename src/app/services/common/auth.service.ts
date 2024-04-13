@@ -19,8 +19,22 @@ export class AuthService {
     } catch {
       expired = true;
     }
-    
+    let roles;
+    if(token != null){
+      const decoded = this.jwtHelper.decodeToken(token)
+      roles = decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+    }
     _isAuthenticated = token != null && !expired;
+    _isCompetent = _isAuthenticated && (roles == "Admin" || roles == "Employee")
+    _isAdmin = roles == "Admin"
+  }
+
+  get isAdmin(): boolean{
+    return _isAdmin;
+  }
+
+  get isCompetent(): boolean{
+    return _isCompetent;
   }
 
   get isAuthenticated(): boolean {
@@ -28,4 +42,6 @@ export class AuthService {
   }
 }
 
+export let _isAdmin: boolean;
+export let _isCompetent: boolean;
 export let _isAuthenticated: boolean;

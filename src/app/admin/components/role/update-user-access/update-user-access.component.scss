@@ -1,0 +1,24 @@
+table {
+    width: 100%
+  }
+  
+  .mat-elevation-z8 {
+    box-shadow: none;
+    width: 100%;
+    min-width: 320px;
+  }
+   
+  th, td {
+    text-align: center;
+  }
+  
+  .two-factor-condition{
+    display: flex;
+    justify-content: center;
+  }
+  
+  .mat-mdc-form-field{
+    background-color: white;
+    margin-top: 8px;
+    margin-bottom: -15px;
+  }

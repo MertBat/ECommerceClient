@@ -1,4 +1,17 @@
 .role-container {
-    width: 100%; 
-    min-height: 350px;
-  }
+  width: 100%;
+  min-height: 400px;
+}
+
+.vertical-line {
+  width: 2px;
+  height: 100%;
+  background-color: #000;
+}
+
+.drawer-content{
+  background-color: white; 
+  margin-left: 244px; 
+  display: flex;
+  justify-content:space-between;
+}

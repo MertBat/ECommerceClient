@@ -11,9 +11,13 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { ListComponent } from './list/list.component';
 import { CreateComponent } from './create/create.component';
 import { DeleteDirectiveModule } from 'src/app/directives/admin/delete/delete.directive.module';
+import { UpdateUserAccessComponent } from './update-user-access/update-user-access.component';
+import { MatSelectModule } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
-  declarations: [RoleComponent, ListComponent, CreateComponent],
+  declarations: [RoleComponent, ListComponent, CreateComponent, UpdateUserAccessComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([{ path: '', component: RoleComponent }]),
@@ -23,7 +27,10 @@ import { DeleteDirectiveModule } from 'src/app/directives/admin/delete/delete.di
     MatButtonModule,
     MatTableModule,
     MatPaginatorModule,
-    DeleteDirectiveModule
+    DeleteDirectiveModule,
+    MatSelectModule, 
+    FormsModule,
+    MatDividerModule  
   ],
 })
 export class RoleModule {}
