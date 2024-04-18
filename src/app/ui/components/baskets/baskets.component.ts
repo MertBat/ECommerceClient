@@ -4,7 +4,6 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
 import { List_Basket_Item } from 'src/app/contracts/basket/list_basket_item';
 import { Update_Basket_Item } from 'src/app/contracts/basket/update_basket_item';
-import { Create_Order } from 'src/app/contracts/order/create_order';
 import {
   BasketItemDeleteState,
   BasketItemRemoveDialogComponent,
@@ -104,18 +103,8 @@ export class BasketsComponent extends BaseComponent implements OnInit {
       data: ShoppingCompleteState.Yes,
       afterClosed: async() => {
         this.showSpinner(SpinnerType.BallAtom);
-        const order: Create_Order = {
-          address: "address",
-          description: "description",
-        };
-        await this.orderService.create(order);
-        this.hideSpinner(SpinnerType.BallAtom);
-        this.toastrService.message('Order done', 'Order', {
-          messageType: ToastrMessageType.Info,
-          position: ToastrPosition.TopRight,
-        });
         $("#basketModal").modal("hide");
-        this.router.navigate(['/']);
+        this.router.navigate(['/order']);
       },
     });
   }

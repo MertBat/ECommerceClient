@@ -1,0 +1,74 @@
+<div class="order-container">
+  <mat-list>
+    <div class="address-container">
+      <div *ngFor="let address of addresses">
+        <mat-card
+          [class]="'address-card card' + address.id"
+          (click)="clicked(address.id)"
+        >
+          <mat-card-header>
+            <mat-card-title-group>
+              <mat-card-title>{{ address.title }}</mat-card-title>
+              <mat-card-subtitle>
+                {{ address.city }}, {{ address.county }}
+              </mat-card-subtitle>
+            </mat-card-title-group>
+          </mat-card-header>
+          <mat-card-content>{{ address.fullAddress }}</mat-card-content>
+          <div class="address-actions">
+            <img
+              src="../../../../assets/edit.png"
+              alt="Edit"
+              width="20"
+              (click)="updateAddress(address.id)"
+            />
+            <img
+              src="../../../../assets/delete-ui.png"
+              alt="Delete"
+              width="20"
+              (click)="deleteAddress(address.id)"
+            />
+          </div>
+        </mat-card>
+      </div>
+      <div class="button-container">
+        <button
+          mat-button
+          color="primary"
+          class="add-address-button"
+          (click)="addAddress()"
+        >
+          Add Address
+        </button>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div><h3>Ödeme Yöntemi</h3></div>
+    <mat-divider></mat-divider>
+    <div>
+      <table class="table table-striped text-capitalize text-center">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th class="text-end">Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let basketItem of basketItems">
+            <td>{{ basketItem.name }}</td>
+            <td>{{ basketItem.quantity }}</td>
+            <td class="text-end">{{ basketItem.price | currency : "₺" }}</td>
+          </tr>
+          <tr>
+            <td colspan="2" class="fw-bold">Total Price</td>
+            <td class="text-end fw-bold">{{ totalPrice | currency : "₺" }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="text-end">
+      <button mat-flat-button color="primary" (click)="orderNow()" [disabled]="!selectedAddressId">Order Now</button>
+    </div>
+  </mat-list>
+</div>

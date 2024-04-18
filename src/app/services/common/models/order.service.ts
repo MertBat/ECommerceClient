@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClientService } from '../http-client.service';
-import { Create_Order } from 'src/app/contracts/order/create_order';
 import { Observable, firstValueFrom } from 'rxjs';
 import { List_Order } from 'src/app/contracts/order/list_order';
 import { SingleOrder } from 'src/app/contracts/order/single_order';
@@ -11,12 +10,14 @@ import { SingleOrder } from 'src/app/contracts/order/single_order';
 export class OrderService {
   constructor(private httpClientService: HttpClientService) {}
 
-  async create(order: Create_Order): Promise<void> {
+  async create(addressId: string): Promise<void> {
     const createObservable: Observable<any> = this.httpClientService.post(
       {
         controller: 'orders',
       },
-      order
+      {
+        addressId: addressId,
+      }
     );
 
     await firstValueFrom(createObservable);
@@ -69,6 +70,6 @@ export class OrderService {
         }
       );
 
-      await firstValueFrom(completeOrderObservable);
+    await firstValueFrom(completeOrderObservable);
   }
 }

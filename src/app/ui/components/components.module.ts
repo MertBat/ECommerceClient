@@ -9,11 +9,14 @@ import { PasswordResetComponent } from './password-reset/password-reset.componen
 import { PasswordResetModule } from './password-reset/password-reset.module';
 import { UpdatePasswordComponent } from './update-password/update-password.component';
 import { UpdatePasswordModule } from './update-password/update-password.module';
+import { OrderComponent } from './order/order.component';
+import { OrderModule } from './order/order.module';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+  ],
   imports: [
     CommonModule,
     ProductsModule,
@@ -21,7 +24,8 @@ import { UpdatePasswordModule } from './update-password/update-password.module';
     BasketsModule,
     RegisterModule,
     PasswordResetModule,
-    UpdatePasswordModule
+    UpdatePasswordModule,
+    OrderModule
   ],
   exports:[
     BasketsModule

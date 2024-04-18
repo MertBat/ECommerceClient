@@ -1,0 +1,61 @@
+<h1 mat-dialog-title>Add Address</h1>
+<div mat-dialog-content>
+  <form
+    class="add-address-form"
+    [formGroup]="addressForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <mat-form-field class="add-address-full-width">
+      <mat-label>Address Name</mat-label>
+      <input
+        matInput
+        placeholder="Ex. Home, Work"
+        formControlName="addressName"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="add-address-full-width">
+      <mat-label>Address</mat-label>
+      <textarea
+        matInput
+        placeholder="Ex. 100 Main St"
+        formControlName="address"
+      ></textarea>
+    </mat-form-field>
+
+    <table class="add-address-full-width" cellspacing="0">
+      <tr>
+        <td>
+          <mat-form-field class="add-address-full-width">
+            <mat-label>City</mat-label>
+            <input matInput placeholder="Ex. İstanbul" formControlName="city" />
+          </mat-form-field>
+        </td>
+        <td style="margin-left: 5px">
+          <mat-form-field
+            class="add-address-full-width"
+            style="margin-left: 5px"
+          >
+            <mat-label>County</mat-label>
+            <input
+              matInput
+              placeholder="Ex. Üsküdar"
+              formControlName="county"
+            />
+          </mat-form-field>
+        </td>
+      </tr>
+    </table>
+    <div mat-dialog-actions>
+      <button mat-button type="button" (click)="close()">Cancel</button>
+      <button
+        mat-button
+        [mat-dialog-close]="data"
+        type="submit"
+        [disabled]="!addressForm.valid"
+      >
+        Create
+      </button>
+    </div>
+  </form>
+</div>

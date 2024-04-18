@@ -6,7 +6,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { SelectProductImageDialogComponent } from './select-product-image-dialog/select-product-image-dialog.component';
 import { FileUploadModule } from '../services/common/file-upload/file-upload.module';
-import {MatCardModule} from '@angular/material/card'; 
+import { MatCardModule } from '@angular/material/card';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BasketItemRemoveDialogComponent } from './basket-item-remove-dialog/basket-item-remove-dialog.component';
 import { BasketShoppingCompleteDialogComponent } from './basket-shopping-complete-dialog/basket-shopping-complete-dialog.component';
@@ -17,12 +17,13 @@ import { MatTableModule } from '@angular/material/table';
 import { MatListModule } from '@angular/material/list';
 import { CompleteOrderDialogComponent } from './complete-order-dialog/complete-order-dialog.component';
 import { AuthorizeMenuDialogComponent } from './authorize-menu-dialog/authorize-menu-dialog.component';
-import {MatChipsModule} from '@angular/material/chips';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatIconModule } from '@angular/material/icon';
 import { QrcodeDialogComponent } from './qrcode-dialog/qrcode-dialog.component';
 import { ProductUpdateDialogComponent } from './product-update-dialog/product-update-dialog.component';
-
+import { AddAddressDialogComponent } from './add-address-dialog/add-address-dialog.component';
+import { UpdateAddressDialogComponent } from './update-address-dialog/update-address-dialog.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,9 @@ import { ProductUpdateDialogComponent } from './product-update-dialog/product-up
     CompleteOrderDialogComponent,
     AuthorizeMenuDialogComponent,
     QrcodeDialogComponent,
-    ProductUpdateDialogComponent  
+    ProductUpdateDialogComponent,
+    AddAddressDialogComponent,
+    UpdateAddressDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -52,6 +55,6 @@ import { ProductUpdateDialogComponent } from './product-update-dialog/product-up
     MatAutocompleteModule,
     AsyncPipe,
     MatIconModule,
-  ]
+  ],
 })
-export class DialogModule { }
+export class DialogModule {}

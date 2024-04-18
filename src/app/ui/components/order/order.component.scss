@@ -1,0 +1,47 @@
+.order-container{
+    display: flex;
+    justify-content: center;
+}
+
+mat-list{
+    min-width: 300px;
+    width: 800px;
+}
+
+.address-container{
+    margin: 10px 10px;
+}
+
+.address-card {
+    margin-bottom: 10px;
+    min-height: 107px;
+    transition: box-shadow 0.4s ease-in-out; 
+}
+
+.address-card:hover{
+    box-shadow: 2px 3px 8px 2px #7b7979
+}
+
+.focus-card{
+    background-color: #eff6ff;
+}
+
+.button-container{
+    text-align: right;
+}
+
+.address-actions{
+    position: absolute;
+    right: 0;
+    top: 10px;
+}
+
+.address-actions img{
+    margin-right: 10px;
+    cursor: pointer;
+    transition: width 0.2s ease-in-out; 
+}
+
+.address-actions img:hover{
+    width: 25px;
+}

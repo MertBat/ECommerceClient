@@ -77,6 +77,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'order',
+    loadChildren: () =>
+      import('./ui/components/order/order.module').then(
+        (module) => module.OrderModule
+      ),
+  },
+  {
     path: 'register',
     loadChildren: () =>
       import('./ui/components/register/register.module').then(
