@@ -1,0 +1,20 @@
+<form class="search-form">
+  <mat-form-field class="search-full-width" appearance="fill">
+    <input
+      type="text"
+      placeholder="Search"
+      matInput
+      [formControl]="searchBar"
+      [matAutocomplete]="auto"     
+    />
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+      <mat-option
+        *ngFor="let option of filteredOptions | async"
+        [value]="option"
+      >
+        {{ option }}
+      </mat-option>
+    </mat-autocomplete>
+</mat-form-field>
+<button class="search-button" mat-raised-button color="primary" (click)="search()">Search</button>
+</form>

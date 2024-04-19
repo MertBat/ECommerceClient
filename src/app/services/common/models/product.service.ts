@@ -76,6 +76,30 @@ export class ProductService {
     return await firstValueFrom(readbyIdObservable);
   }
 
+  async readFilterName(value: string): Promise<string[]> {
+    const readFilterNameObservable: Observable<string[]> = this.httpClientService.get<string[]>(
+      {
+        controller: 'products',
+        action: 'getfilteredproductname'
+      },
+      value
+    );
+
+    return await firstValueFrom(readFilterNameObservable);
+  }
+
+  async readFilter(value: string): Promise<List_Product[]> {
+    const readFilterNameObservable: Observable<List_Product[]> = this.httpClientService.get<List_Product[]>(
+      {
+        controller: 'products',
+        action: 'getfilteredproduct'
+      },
+      value
+    );
+
+    return await firstValueFrom(readFilterNameObservable);
+  }
+
   async update(id: string, product: Get_Product) {
     const updateObservable: Observable<any> = this.httpClientService.put({
       controller: 'products'

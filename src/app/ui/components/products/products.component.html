@@ -1,1 +1,4 @@
-<app-list></app-list>
+<div class="container">
+    <app-search-bar (searchStringChange)="onSearchStringChange($event)"></app-search-bar>
+    <app-list [searchString]="searchString"></app-list>
+</div>

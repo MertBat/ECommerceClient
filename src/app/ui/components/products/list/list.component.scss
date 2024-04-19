@@ -1,27 +1,38 @@
 .card {
    float: left;
-   margin-right: 25px;
    margin-bottom: 25px;
    height: 400px;
    width: 21%;
    min-width: 15rem;
 }
 
-.card-img-top{
+.card-img-top {
    height: 270px;
    object-fit: cover;
 }
 
-.pagination-product {
-   width: 100%;
+.cards {
    display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+   align-items: flex-start;
    justify-content: center;
+   gap: 20px;
 }
 
-.nav-link:hover{
+.pagination-product {
+   width: 100%;
+}
+
+.nav-link:hover {
    color: rgb(48, 65, 14);
 }
 
-a{
+a {
    cursor: pointer;
- }
+}
+
+.pagination-product {
+   display: flex;
+   justify-content: center;
+}
