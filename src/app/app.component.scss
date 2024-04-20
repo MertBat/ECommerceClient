@@ -1,7 +1,29 @@
 .content {
     margin-top: 20px;
+    background-color: #ffffff;
 }
 
+.navbar.navbar-expand-lg.bg-body-tertiary {
+    background-color: transparent !important;
+    background-color: #ffffff;
+}
+
+.navbar-nav {
+    font-size: large;
+}
+
+.navbar-nav .nav-link.active {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.basket-section {
+    margin-right: 25px;
+}
+
+.basket-icon {
+    font-size: 34px;
+    cursor: pointer;
+}
 
 .modal {
     top: 0;
@@ -36,3 +58,48 @@
 ::ng-deep .cdk-overlay-container {
     z-index: 1053 !important;
 }
+
+.footer {
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    background-color: #312c2b;
+    color: #cacaca;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+}
+
+.information{ 
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+}
+
+.information-content{
+    min-width: 180px;
+    max-width: 750px;
+    padding: 15px;
+}
+
+.information-content p{
+
+    
+}
+
+.information-icons{
+    min-width: 350px;
+    max-width: 750px;
+    text-align: center;
+    padding: auto;
+}
+
+.information-icons p a{
+    margin-right: 30px;
+    color: #cacaca;
+} 

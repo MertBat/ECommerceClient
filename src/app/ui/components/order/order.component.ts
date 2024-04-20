@@ -18,6 +18,7 @@ import { DialogService } from 'src/app/services/common/dialog.service';
 import { AddressService } from 'src/app/services/common/models/address.service';
 import { BasketService } from 'src/app/services/common/models/basket.service';
 import { OrderService } from 'src/app/services/common/models/order.service';
+import { CardItemCountService } from 'src/app/services/ui/card-item-count.service';
 import {
   CustomToastrService,
   ToastrMessageType,
@@ -42,7 +43,8 @@ export class OrderComponent extends BaseComponent implements OnInit {
     private toastrService: CustomToastrService,
     private basketService: BasketService,
     private orderService: OrderService,
-    private router: Router
+    private router: Router,
+    private cardItemCountService: CardItemCountService
   ) {
     super(spinner);
   }
@@ -132,11 +134,12 @@ export class OrderComponent extends BaseComponent implements OnInit {
 
     this.showSpinner(SpinnerType.BallScaleMultiple);
     await this.orderService.create(this.selectedAddressId).then(()=>{
+      this.cardItemCountService.setZero();
       this.toastrService.message('Order received', 'Order', {
         messageType: ToastrMessageType.Success,
         position: ToastrPosition.TopRight,
       });
-      this.router.navigate(['/']);
+      this.router.navigate(['/product']);
     });
     this.hideSpinner(SpinnerType.BallScaleMultiple);
     

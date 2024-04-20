@@ -8,6 +8,7 @@ import { List_Product } from 'src/app/contracts/product/list_product';
 import { List_Product_Image } from 'src/app/contracts/product/list_product_image';
 import { BasketService } from 'src/app/services/common/models/basket.service';
 import { ProductService } from 'src/app/services/common/models/product.service';
+import { CardItemCountService } from 'src/app/services/ui/card-item-count.service';
 import {
   CustomToastrService,
   ToastrMessageType,
@@ -38,7 +39,8 @@ export class ListComponent extends BaseComponent{
     private productService: ProductService,
     private activatedRoute: ActivatedRoute,
     private basketService: BasketService,
-    private toasterService: CustomToastrService
+    private toasterService: CustomToastrService,
+    private cardItemCountService: CardItemCountService
   ) {
     super(spinner);
   }
@@ -161,12 +163,15 @@ export class ListComponent extends BaseComponent{
       productId: product.id,
       quantity: 1,
     };
-    await this.basketService.add(_basketItem);
-    this.hideSpinner(SpinnerType.BallScaleMultiple);
-    this.toasterService.message('Product added to basket', 'Success', {
-      messageType: ToastrMessageType.Success,
-      position: ToastrPosition.TopRight,
+    await this.basketService.add(_basketItem).then(()=>{
+      this.cardItemCountService.addCount();
+      this.toasterService.message('Product added to basket', 'Success', {
+        messageType: ToastrMessageType.Success,
+        position: ToastrPosition.TopRight,
+      });
     });
+    this.hideSpinner(SpinnerType.BallScaleMultiple);
+    
   }
 
   startCounter(

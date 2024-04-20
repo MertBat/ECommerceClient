@@ -16,6 +16,7 @@ import {
   ToastrMessageType,
   ToastrPosition,
 } from 'src/app/services/ui/custom-toastr.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -30,6 +31,7 @@ export class RegisterComponent extends BaseComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private toasterService: CustomToastrService,
+    private router: Router,
     spinner: NgxSpinnerService
   ) {
     super(spinner)
@@ -81,18 +83,12 @@ export class RegisterComponent extends BaseComponent implements OnInit {
       return;
     }
 
-    const result: Create_User = await this.userService.create(data);
-    if (result.succeeded) {
-      this.toasterService.message(result.message, "Success", {
+    await this.userService.create(data).then(()=>{
+      this.router.navigate(["/products"])
+      this.toasterService.message("Account Successfully Created", "Success", {
         messageType: ToastrMessageType.Success,
         position: ToastrPosition.TopRight,
       });
-    }
-    else{
-      this.toasterService.message(result.message, "Error", {
-        messageType: ToastrMessageType.Error,
-        position: ToastrPosition.TopRight,
-      });
-    }
+    })
   }
 }

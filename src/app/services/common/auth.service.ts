@@ -1,13 +1,14 @@
 import { ContentObserver } from '@angular/cdk/observers';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { CardItemCountService } from '../ui/card-item-count.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private jwtHelper:JwtHelperService) { }
+  constructor(private jwtHelper:JwtHelperService, private cardItemCountService: CardItemCountService) { }
 
   identityCheck(){
     const token: string = localStorage.getItem('accessToken');
@@ -27,6 +28,10 @@ export class AuthService {
     _isAuthenticated = token != null && !expired;
     _isCompetent = _isAuthenticated && (roles == "Admin" || roles == "Employee")
     _isAdmin = roles == "Admin"
+
+    if(_isAuthenticated){
+      this.cardItemCountService.getCardItemCount();
+    }
   }
 
   get isAdmin(): boolean{

@@ -15,6 +15,9 @@ import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, So
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpErrorHandlerInterceptorService } from './services/common/http-error-handler-interceptor.service';
 import { DynamicLoadComponentDirective } from './directives/common/dynamic-load-component.directive';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatIconModule} from '@angular/material/icon';
+
 
 @NgModule({
   declarations: [
@@ -32,6 +35,8 @@ import { DynamicLoadComponentDirective } from './directives/common/dynamic-load-
     NgxSpinnerModule,
     HttpClientModule,
     ReactiveFormsModule,
+    MatIconModule,
+    MatBadgeModule,
     JwtModule.forRoot({
       config:{
         tokenGetter: () => localStorage.getItem("accessToken"),

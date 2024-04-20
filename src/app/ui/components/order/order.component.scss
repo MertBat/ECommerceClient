@@ -15,7 +15,8 @@ mat-list{
 .address-card {
     margin-bottom: 10px;
     min-height: 107px;
-    transition: box-shadow 0.4s ease-in-out; 
+    transition: box-shadow 0.4s ease-in-out;
+    cursor: pointer; 
 }
 
 .address-card:hover{

@@ -1,7 +1,9 @@
-<div>
+<div class="body">
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">E-commerce</a>
+      <a class="navbar-brand m-lg-2" href="#"
+        ><img src="../assets/e-commerce-logo.png" alt="e-commerce" width="50px"
+      /></a>
       <button
         class="navbar-toggler"
         type="button"
@@ -48,20 +50,6 @@
               >Logout</a
             >
           </li>
-          <!-- <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li> -->
-          <!-- <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Dropdown
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-              </ul>
-            </li> -->
           <li class="nav-item">
             <a
               class="nav-link active text-success"
@@ -72,16 +60,16 @@
             >
           </li>
         </ul>
-        <div class="d-flex">
-          <button
-            type="button"
-            class="btn btn-primary"
+        <div class="basket-section">
+          <mat-icon
+            [matBadge]="count | async"
+            matBadgeColor="primary"
             data-bs-toggle="modal"
             data-bs-target="#basketModal"
             (click)="loadComponent()"
-          >
-            Basket
-          </button>
+            fontIcon="shopping_basket"
+            class="basket-icon"
+          ></mat-icon>
         </div>
       </div>
     </div>
@@ -89,16 +77,48 @@
   <div class="content"><router-outlet></router-outlet></div>
 </div>
 
+<div class="footer">
+  <div class="information">
+    <div class="information-content">
+      <h3>About This Project;</h3>
+      <p>
+        Frontend: 
+        On the frontend, I leveraged powerful libraries such as
+        Angular 15, Bootstrap, AlertifyJS, Ngx-File-Drop, Ngx-Spinner,
+        Ngx-Toastr, RxJS, and Angular MaterialUI. These tools facilitated the
+        development of a user-friendly interface, enabling seamless interaction
+        for customers. Additionally, external services like AWS S3, Azure
+        Storage Blobs, and Facebook Authentication integrations with Google were
+        provided to enhance the overall experience.
+      </p>
+      <p>
+        Backend: 
+        "In the backend, I implemented .Net Onion architecture and CQRS
+        (Command Query Responsibility Segregation) pattern for order and product
+        management, integrating an advanced authorization system. PostgreSQL
+        database served as the foundation, with Entity Framework and Identity
+        Framework managing database operations efficiently. Tools like MediatR,
+        FluentValidation, JWTBearer, Serilog, and SignalR were instrumental in
+        enhancing code quality."
+      </p>
+    </div>
+    <div class="information-icons">
+      <p>
+        <a href="mailto:mert.batmaz@hotmail.com"><img src="../assets/mail.png" alt="email" width="50px"></a>
+        <a href="https://www.linkedin.com/in/mert-batmaz/" target="_blank"><img src="../assets/linkedln.png" alt="linkedln" width="40px"></a>
+        <a href="https://github.com/MertBat" target="_blank"><img src="../assets/github.png" alt="github" width="45px"></a>              
+      </p>
+    </div>
+  </div>
+  <hr />
+  <p>&copy; 2024 E-commerce. All rights reserved.</p>
+</div>
+
 <ngx-spinner name="s1" type="ball-spin-clockwise-fade-rotating"></ngx-spinner>
 <ngx-spinner name="s2" type="ball-atom"></ngx-spinner>
 <ngx-spinner name="s3" type="ball-scale-multiple"></ngx-spinner>
 
-<div
-  class="modal fade right"
-  id="basketModal"
-  tabindex="-1"
-  aria-hidden="true"
->
+<div class="modal fade right" id="basketModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-right">
     <div class="modal-content">
       <ng-template appDynamicLoadComponent></ng-template>

@@ -14,14 +14,10 @@ import {
 } from 'src/app/dialogs/basket-shopping-complete-dialog/basket-shopping-complete-dialog.component';
 import { DialogService } from 'src/app/services/common/dialog.service';
 import { BasketService } from 'src/app/services/common/models/basket.service';
-import { OrderService } from 'src/app/services/common/models/order.service';
-import {
-  CustomToastrService,
-  ToastrMessageType,
-  ToastrPosition,
-} from 'src/app/services/ui/custom-toastr.service';
+import { CardItemCountService } from 'src/app/services/ui/card-item-count.service';
+import { CustomToastrService } from 'src/app/services/ui/custom-toastr.service';
 
-declare var $:any;
+declare var $: any;
 
 @Component({
   selector: 'app-baskets',
@@ -35,9 +31,9 @@ export class BasketsComponent extends BaseComponent implements OnInit {
     spinner: NgxSpinnerService,
     private basketService: BasketService,
     private dialogService: DialogService,
-    private orderService: OrderService,
     private toastrService: CustomToastrService,
-    private router: Router
+    private router: Router,
+    private cardItemCountService: CardItemCountService
   ) {
     super(spinner);
   }
@@ -63,7 +59,9 @@ export class BasketsComponent extends BaseComponent implements OnInit {
           this.basketItems = this.basketItems.filter(
             (item) => item.basketItemId !== basketItem.basketItemId
           );
-          await this.basketService.delete(basketItem.basketItemId);
+          await this.basketService.delete(basketItem.basketItemId).then(() => {
+            this.cardItemCountService.removeCount();
+          });
         },
       });
     } else {
@@ -73,7 +71,9 @@ export class BasketsComponent extends BaseComponent implements OnInit {
         }
         return item;
       });
-      await this.basketService.put(updatedBasketItem);
+      await this.basketService.put(updatedBasketItem).then(() => {
+        this.cardItemCountService.removeCount();
+      });
     }
 
     this.hideSpinner(SpinnerType.BallScaleMultiple);
@@ -93,7 +93,9 @@ export class BasketsComponent extends BaseComponent implements OnInit {
       return item;
     });
 
-    await this.basketService.put(updatedBasketItem);
+    await this.basketService.put(updatedBasketItem).then(()=>{
+      this.cardItemCountService.addCount();
+    });
     this.hideSpinner(SpinnerType.BallScaleMultiple);
   }
 
@@ -101,9 +103,9 @@ export class BasketsComponent extends BaseComponent implements OnInit {
     this.dialogService.openDialog({
       componentType: BasketShoppingCompleteDialogComponent,
       data: ShoppingCompleteState.Yes,
-      afterClosed: async() => {
+      afterClosed: async () => {
         this.showSpinner(SpinnerType.BallAtom);
-        $("#basketModal").modal("hide");
+        $('#basketModal').modal('hide');
         this.router.navigate(['/order']);
       },
     });
