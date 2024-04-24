@@ -1,6 +1,13 @@
+.body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Sayfanın en az ekran yüksekliği kadar olmasını sağlar */
+}
+
 .content {
     margin-top: 20px;
     background-color: #ffffff;
+    flex: 1; 
 }
 
 .navbar.navbar-expand-lg.bg-body-tertiary {
@@ -60,7 +67,6 @@
 }
 
 .footer {
-    bottom: 0;
     width: 100%;
     height: auto;
     background-color: #312c2b;
@@ -72,7 +78,7 @@
     padding-top: 10px;
 }
 
-.information{ 
+.information {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -81,25 +87,20 @@
     gap: 60px;
 }
 
-.information-content{
+.information-content {
     min-width: 180px;
     max-width: 750px;
     padding: 15px;
 }
 
-.information-content p{
-
-    
-}
-
-.information-icons{
+.information-icons {
     min-width: 350px;
     max-width: 750px;
     text-align: center;
     padding: auto;
 }
 
-.information-icons p a{
+.information-icons p a {
     margin-right: 30px;
     color: #cacaca;
-} 
+}

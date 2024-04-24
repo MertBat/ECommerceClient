@@ -84,7 +84,7 @@ export class RegisterComponent extends BaseComponent implements OnInit {
     }
 
     await this.userService.create(data).then(()=>{
-      this.router.navigate(["/products"])
+      this.router.navigate(["/login"])
       this.toasterService.message("Account Successfully Created", "Success", {
         messageType: ToastrMessageType.Success,
         position: ToastrPosition.TopRight,

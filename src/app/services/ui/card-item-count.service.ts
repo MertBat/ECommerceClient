@@ -41,7 +41,6 @@ export class CardItemCountService {
   }
 
   private notifyCountChanged() {
-    console.log("notifiy", this.count)
     this.countChanged.next(this.count);
   }
 }

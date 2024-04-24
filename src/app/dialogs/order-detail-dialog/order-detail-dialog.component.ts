@@ -11,6 +11,7 @@ import {
 } from '../complete-order-dialog/complete-order-dialog.component';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SpinnerType } from 'src/app/base/base.component';
+import { OrderStatueChangeService } from 'src/app/services/admin/order-statue-change.service';
 
 @Component({
   selector: 'app-order-detail-dialog',
@@ -33,7 +34,8 @@ export class OrderDetailDialogComponent
     private orderService: OrderService,
     private dialogService: DialogService,
     private spinner: NgxSpinnerService,
-    private alertifyService: AlertifyService
+    private alertifyService: AlertifyService,
+    private orderStatueChangeService: OrderStatueChangeService
   ) {
     super(dialogRef);
   }
@@ -63,6 +65,7 @@ export class OrderDetailDialogComponent
             position: Position.TopRight
           })
         })
+        await this.orderStatueChangeService.getOrders();
         this.spinner.hide(SpinnerType.BallScaleMultiple)
       }
     });

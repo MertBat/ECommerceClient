@@ -139,7 +139,7 @@ export class OrderComponent extends BaseComponent implements OnInit {
         messageType: ToastrMessageType.Success,
         position: ToastrPosition.TopRight,
       });
-      this.router.navigate(['/product']);
+      this.router.navigate(['/products']);
     });
     this.hideSpinner(SpinnerType.BallScaleMultiple);
     

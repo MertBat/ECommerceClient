@@ -20,7 +20,7 @@
 </div>
 <div mat-dialog-actions>
     <button mat-button (click)="close()">No Thanks</button>
-    <button cdkFocusInitial (click)="onYesClick()" mat-button [mat-dialog-close]="product"
+    <button cdkFocusInitial (click)="onYesClick()" mat-button [mat-dialog-close]="data"
         [disabled]="this.product.name.trim() == '' || this.product.stock < 0 || this.product.price < 0"
         *ngIf="product">Ok</button>
 </div>

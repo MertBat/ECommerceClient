@@ -40,7 +40,5 @@ export class ProductUpdateDialogComponent extends BaseDialog<ProductUpdateDialog
       })
     })
     this.spinnerService.hide(SpinnerType.BallScaleMultiple)
-
-    console.log(this.product);
   }
 }

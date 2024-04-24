@@ -30,7 +30,7 @@ export class ListComponent extends BaseComponent implements OnInit {
     'photos',
     'qRCode',
     'edit',
-    'delete'
+    'delete',
   ];
   dataSource: MatTableDataSource<List_Product> = null;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -43,27 +43,30 @@ export class ListComponent extends BaseComponent implements OnInit {
     super(spinner);
   }
 
-  async getProducts() {
-    this.showSpinner(SpinnerType.BallAtom);
-    const allProducts: { totalCount: number; products: List_Product[]; } = await this.productService.read(
-      this.paginator ? this.paginator.pageIndex : 0,
-      this.paginator ? this.paginator.pageSize : 5,
-      () => this.hideSpinner(SpinnerType.BallAtom),
-      (errorMessage) => {
-        this.alertifyService.message(errorMessage, {
-          dismissOthers: true,
-          messageType: MessageType.Error,
-          position: Position.TopRight,
-        })
-      }
-    );
-
-    this.paginator.length = allProducts.totalCount;
-    this.dataSource = new MatTableDataSource<List_Product>(allProducts.products)
-  }
-
   async ngOnInit() {
     await this.getProducts();
+  }
+
+  async getProducts() {
+    this.showSpinner(SpinnerType.BallAtom);
+    const allProducts: { totalCount: number; products: List_Product[] } =
+      await this.productService.read(
+        this.paginator ? this.paginator.pageIndex : 0,
+        this.paginator ? this.paginator.pageSize : 5,
+        () => this.hideSpinner(SpinnerType.BallAtom),
+        (errorMessage) => {
+          this.alertifyService.message(errorMessage, {
+            dismissOthers: true,
+            messageType: MessageType.Error,
+            position: Position.TopRight,
+          });
+        }
+      );
+
+    this.paginator.length = allProducts.totalCount;
+    this.dataSource = new MatTableDataSource<List_Product>(
+      allProducts.products
+    );
   }
 
   addProductImages(id: string) {
@@ -71,33 +74,33 @@ export class ListComponent extends BaseComponent implements OnInit {
       componentType: SelectProductImageDialogComponent,
       data: id,
       options: {
-        width: "1400px"
-      }
-    })
+        width: '1400px',
+      },
+    });
   }
 
   async pageChanged() {
     await this.getProducts();
   }
 
-  editProduct(id:string){
+  editProduct(id: string) {
     this.dialogService.openDialog({
       componentType: ProductUpdateDialogComponent,
-      data:id,
-      afterClosed: (lao)=>{
-        console.log(lao)
+      data: id,
+      afterClosed: async () => {
+        await this.getProducts();
       },
-      options:{
-        width: "350px"
-      }
-    })
+      options: {
+        width: '350px',
+      },
+    });
   }
 
   showQRCode(id: string) {
     this.dialogService.openDialog({
       componentType: QrcodeDialogComponent,
       data: id,
-      afterClosed: () => { },
-    })
+      afterClosed: () => {},
+    });
   }
 }

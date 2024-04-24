@@ -6,6 +6,7 @@ import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
 import { List_Order } from 'src/app/contracts/order/list_order';
 import { ORderDetailDialogState, OrderDetailDialogComponent } from 'src/app/dialogs/order-detail-dialog/order-detail-dialog.component';
 import { AlertifyService, MessageType, Position } from 'src/app/services/admin/alertify.service';
+import { OrderStatueChangeService } from 'src/app/services/admin/order-statue-change.service';
 import { DialogService } from 'src/app/services/common/dialog.service';
 import { OrderService } from 'src/app/services/common/models/order.service';
 
@@ -32,10 +33,14 @@ export class ListComponent extends BaseComponent implements OnInit {
   constructor(
     spinner: NgxSpinnerService,
     private orderService: OrderService,
-    private alertifyService: AlertifyService,
+    private orderStatueChangeService:OrderStatueChangeService,
     private dialogService: DialogService
   ) {
     super(spinner);
+    this.orderStatueChangeService.$order.subscribe((items)=>{
+      this.paginator.length = items.totalOrderCount;
+      this.dataSource = new MatTableDataSource<List_Order>(items.orders) 
+    })
   }
 
   async ngOnInit() {
@@ -66,7 +71,7 @@ export class ListComponent extends BaseComponent implements OnInit {
         width: '750px'
       },
       afterClosed: ()=> {
-        
+        console.log("inside")
       }
     })
   }
