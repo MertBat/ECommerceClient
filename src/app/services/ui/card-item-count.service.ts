@@ -34,10 +34,12 @@ export class CardItemCountService {
 
   setZero(){
     this.count = 0;
+    this.notifyCountChanged();
   }
 
   setNull(){
     this.count = null;
+    this.notifyCountChanged();
   }
 
   private notifyCountChanged() {

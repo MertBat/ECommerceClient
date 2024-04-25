@@ -10,7 +10,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent } from 'src/app/base/base.component';
 import { User } from 'src/app/entities/user';
 import { UserService } from 'src/app/services/common/models/user.service';
-import { Create_User } from 'src/app/contracts/users/create_user';
+
 import {
   CustomToastrService,
   ToastrMessageType,
@@ -34,7 +34,7 @@ export class RegisterComponent extends BaseComponent implements OnInit {
     private router: Router,
     spinner: NgxSpinnerService
   ) {
-    super(spinner)
+    super(spinner);
   }
 
   ngOnInit(): void {
@@ -83,12 +83,12 @@ export class RegisterComponent extends BaseComponent implements OnInit {
       return;
     }
 
-    await this.userService.create(data).then(()=>{
-      this.router.navigate(["/login"])
-      this.toasterService.message("Account Successfully Created", "Success", {
+    await this.userService.create(data).then(() => {
+      this.router.navigate(['/login']);
+      this.toasterService.message('Account Successfully Created', 'Success', {
         messageType: ToastrMessageType.Success,
         position: ToastrPosition.TopRight,
       });
-    })
+    });
   }
 }

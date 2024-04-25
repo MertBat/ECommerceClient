@@ -56,11 +56,11 @@
               aria-disabled="true"
               routerLink="admin"
               *ngIf="authService.isCompetent"
-              >Admin</a
+              >Control Panel</a
             >
           </li>
         </ul>
-        <div class="basket-section">
+        <div class="basket-section" *ngIf="isAuthenticated">
           <mat-icon
             [matBadge]="count | async"
             matBadgeColor="primary"

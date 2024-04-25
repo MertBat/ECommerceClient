@@ -6,7 +6,10 @@ import {
   ToastrMessageType,
   ToastrPosition,
 } from './services/ui/custom-toastr.service';
-import { ComponentName, DynamicLoadComponentService } from './services/common/dynamic-load-component.service';
+import {
+  ComponentName,
+  DynamicLoadComponentService,
+} from './services/common/dynamic-load-component.service';
 import { DynamicLoadComponentDirective } from './directives/common/dynamic-load-component.directive';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { CardItemCountService } from './services/ui/card-item-count.service';
@@ -19,28 +22,31 @@ declare var $: any;
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-
-  @ViewChild(DynamicLoadComponentDirective,{static: true})
-  dynamicLoadComponentDirective : DynamicLoadComponentDirective;
-  count:Observable<number>;
+  @ViewChild(DynamicLoadComponentDirective, { static: true })
+  dynamicLoadComponentDirective: DynamicLoadComponentDirective;
+  count: Observable<number>;
+  isAuthenticated: boolean = false;
 
   constructor(
     public authService: AuthService,
     private toastrService: CustomToastrService,
     private router: Router,
-    private dynamicLoadComponentService:DynamicLoadComponentService,
+    private dynamicLoadComponentService: DynamicLoadComponentService,
     private socialAuthService: SocialAuthService,
     private cardItemCountService: CardItemCountService
   ) {
     authService.identityCheck();
-    this.count = this.cardItemCountService.count$
+    this.count = this.cardItemCountService.count$;
+    this.authService.$isAuthenticated.subscribe((state)=>{
+      this.isAuthenticated = state;
+    })
   }
 
-  async ngOnInit(){
-    if(_isAuthenticated){
+  async ngOnInit() {
+    if (_isAuthenticated) {
       await this.cardItemCountService.getCardItemCount();
     }
-
+    this.isAuthenticated = _isAuthenticated;
   }
 
   signOut() {
@@ -48,6 +54,7 @@ export class AppComponent implements OnInit {
     localStorage.removeItem('refreshToken');
     this.socialAuthService.signOut();
     this.authService.identityCheck();
+    this.isAuthenticated = false;
     this.router.navigate(['']);
     this.toastrService.message('Oturum kapatılmıştır!', 'Oturum Kapatıldı', {
       messageType: ToastrMessageType.Warning,
@@ -57,6 +64,9 @@ export class AppComponent implements OnInit {
   }
 
   loadComponent() {
-    this.dynamicLoadComponentService.loadComponent(ComponentName.BasketsComponent, this.dynamicLoadComponentDirective.viewContainerRef);
+    this.dynamicLoadComponentService.loadComponent(
+      ComponentName.BasketsComponent,
+      this.dynamicLoadComponentDirective.viewContainerRef
+    );
   }
 }

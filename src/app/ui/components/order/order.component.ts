@@ -83,8 +83,10 @@ export class OrderComponent extends BaseComponent implements OnInit {
     this.dialogService.openDialog({
       componentType: AddAddressDialogComponent,
       data: AddAddressDialogStatus.Create,
-      afterClosed: async () => {
-        await this.getAllAddresses();
+      afterClosed: async (data) => {
+        setTimeout(async() => {
+          await this.getAllAddresses();
+        }, 1000);    
         this.hideSpinner(SpinnerType.BallScaleMultiple);
       },
     });
