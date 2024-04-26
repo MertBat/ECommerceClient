@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiUrl:"http://ecommerce-env.eba-umzzrvqq.us-east-1.elasticbeanstalk.com/api",
+  baseSignalRUrl : "http://ecommerce-env.eba-umzzrvqq.us-east-1.elasticbeanstalk.com/"
 };
 
 /*

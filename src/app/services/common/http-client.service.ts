@@ -1,14 +1,17 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HttpClientService {
+
+  baseUrl = environment.apiUrl;
+
   constructor(
     private httpClient: HttpClient,
-    @Inject('baseUrl') private baseUrl: string
   ) { }
 
   private url(requestParameter: Partial<RequestParameters>): string {

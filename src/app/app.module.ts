@@ -47,8 +47,6 @@ import {MatIconModule} from '@angular/material/icon';
     SocialLoginModule
   ],
   providers: [
-    {provide: "baseUrl", useValue: "www.ecommerce-env.eba-umzzrvqq.us-east-1.elasticbeanstalk.com/api", multi:true},
-    {provide: "baseSignalRUrl", useValue: "www.ecommerce-env.eba-umzzrvqq.us-east-1.elasticbeanstalk.com/", multi:true},
     {
       provide: 'SocialAuthServiceConfig',
       useValue: {

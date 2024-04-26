@@ -4,12 +4,15 @@ import {
   HubConnectionBuilder,
   HubConnectionState,
 } from '@microsoft/signalr';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SignalRService {
-  constructor(@Inject('baseSignalRUrl') private baseSignalRUrl: string) {}
+
+  baseSignalRUrl = environment.baseSignalRUrl;
+  constructor() {}
 
   //başlatılmış bir hub verir
   start(hubUrl: string) {
