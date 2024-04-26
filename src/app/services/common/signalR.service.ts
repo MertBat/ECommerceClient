@@ -11,8 +11,7 @@ import { environment } from 'src/environments/environment';
 })
 export class SignalRService {
 
-  baseSignalRUrl = environment.baseSignalRUrl;
-  constructor() {}
+  constructor( @Inject('baseUrl') private baseSignalRUrl: string) {}
 
   //başlatılmış bir hub verir
   start(hubUrl: string) {
