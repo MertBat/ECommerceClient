@@ -58,11 +58,11 @@
           <tr *ngFor="let basketItem of basketItems">
             <td>{{ basketItem.name }}</td>
             <td>{{ basketItem.quantity }}</td>
-            <td class="text-end">{{ basketItem.price | currency : "₺" }}</td>
+            <td class="text-end">{{ basketItem.price | currency}}</td>
           </tr>
           <tr>
             <td colspan="2" class="fw-bold">Total Price</td>
-            <td class="text-end fw-bold">{{ totalPrice | currency : "₺" }}</td>
+            <td class="text-end fw-bold">{{ totalPrice | currency}}</td>
           </tr>
         </tbody>
       </table>
