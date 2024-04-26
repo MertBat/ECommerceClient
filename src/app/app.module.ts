@@ -40,15 +40,15 @@ import {MatIconModule} from '@angular/material/icon';
     JwtModule.forRoot({
       config:{
         tokenGetter: () => localStorage.getItem("accessToken"),
-        allowedDomains: ["localhost:7033"]
+        allowedDomains: ["ecommerce-env.eba-umzzrvqq.us-east-1.elasticbeanstalk.com"]
         // disallowedRoutes gönderilmemesi gereken url ler için
       }
     }),
     SocialLoginModule
   ],
   providers: [
-    {provide: "baseUrl", useValue: "https://localhost:7033/api", multi:true},
-    {provide: "baseSignalRUrl", useValue: "https://localhost:7033/", multi:true},
+    {provide: "baseUrl", useValue: "http://ecommerce-env.eba-umzzrvqq.us-east-1.elasticbeanstalk.com/api", multi:true},
+    {provide: "baseSignalRUrl", useValue: "http://ecommerce-env.eba-umzzrvqq.us-east-1.elasticbeanstalk.com/", multi:true},
     {
       provide: 'SocialAuthServiceConfig',
       useValue: {
@@ -60,7 +60,7 @@ import {MatIconModule} from '@angular/material/icon';
           },
           {
             id: FacebookLoginProvider.PROVIDER_ID,
-            provider: new FacebookLoginProvider('906078141031020')
+            provider: new FacebookLoginProvider('2246788945661248')
           }
         ],
         onError: (err) => {
