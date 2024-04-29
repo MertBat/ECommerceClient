@@ -22,7 +22,7 @@
         <tr *ngFor="let basketItem of basketItems; index as i">
           <th scope="row">{{ i + 1 }}</th>
           <td>{{ basketItem.name }}</td>
-          <td>{{ basketItem.price }}</td>
+          <td>{{ basketItem.price | currency }}</td>
           <td>
             <div class="row justify-content-center align-items-center">
               <a

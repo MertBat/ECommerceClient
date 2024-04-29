@@ -33,16 +33,6 @@ export class DashboardComponent extends BaseComponent implements OnInit {
   async ngOnInit() {
     await this.getSumamary();
     this.signalRService.on(
-      HubUrls.ProductHub,
-      ReciveFunctions.ProductAddedMessageReceiveFunction,
-      (message) => {
-        this.aletrtify.message(message, {
-          messageType: MessageType.Notify,
-          position: Position.BottomRight,
-        });
-      }
-    );
-    this.signalRService.on(
       HubUrls.OrderHub,
       ReciveFunctions.OrderAddedMessageReceiveFunction,
       (message) => {
@@ -63,7 +53,7 @@ export class DashboardComponent extends BaseComponent implements OnInit {
   async downloadPdf() {
     this.showSpinner(SpinnerType.BallAtom);
     const fileResponse  = await this.dashboardService.getPdf();
-    
+
     // Create a Blob from the file contents
     const binaryString = window.atob(fileResponse.fileContents);
     const binaryLen = binaryString.length;
@@ -75,8 +65,21 @@ export class DashboardComponent extends BaseComponent implements OnInit {
     // Create Blob from binary array buffer
     const blob = new Blob([bytes], { type: 'application/pdf' });
 
-    // Save the Blob as a PDF file
-    await saveAs(blob, fileResponse.fileDownloadName);
+    // Create a temporary anchor element
+    const a = document.createElement('a');
+    document.body.appendChild(a);
+
+    // Set the href attribute of the anchor to the Blob object
+    a.href = URL.createObjectURL(blob);
+
+    // Set the download attribute to specify the filename
+    a.download = fileResponse.fileDownloadName;
+
+    // Trigger the download by simulating a click on the anchor
+    a.click();
+
+    // Cleanup: remove the temporary anchor element
+    document.body.removeChild(a);
 
     this.hideSpinner(SpinnerType.BallAtom);
   }

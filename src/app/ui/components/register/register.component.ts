@@ -7,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { BaseComponent } from 'src/app/base/base.component';
+import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
 import { User } from 'src/app/entities/user';
 import { UserService } from 'src/app/services/common/models/user.service';
 
@@ -82,7 +82,7 @@ export class RegisterComponent extends BaseComponent implements OnInit {
     if (this.frm.invalid || this.component.passwordAgain.invalid) {
       return;
     }
-
+    this.showSpinner(SpinnerType.BallScaleMultiple);
     await this.userService.create(data).then(() => {
       this.router.navigate(['/login']);
       this.toasterService.message('Account Successfully Created', 'Success', {
@@ -90,5 +90,6 @@ export class RegisterComponent extends BaseComponent implements OnInit {
         position: ToastrPosition.TopRight,
       });
     });
+    this.hideSpinner(SpinnerType.BallScaleMultiple);
   }
 }

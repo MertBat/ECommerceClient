@@ -1,10 +1,15 @@
 <h2 mat-dialog-title>Product Images</h2>
 <mat-dialog-content class="mat-typography">
   <app-file-upload [options]="options"></app-file-upload>
-
+  <p *ngIf="images.length > 0">Choose showcase picture:</p>
   <mat-card class="product-image-card showCard" *ngFor="let image of images">
     <mat-card-header>
-      <input type="radio" name="img" (click)="showcase(image.id)" [checked]="image.showcase"/>
+      <input
+        type="radio"
+        name="img"
+        (click)="showcase(image.id)"
+        [checked]="image.showcase"
+      />
     </mat-card-header>
     <img
       class="product-images"

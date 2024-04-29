@@ -12,6 +12,7 @@ import {
   DeleteDialogComponent,
   DeleteState,
 } from '../delete-dialog/delete-dialog.component';
+import { AlertifyService, MessageType, Position } from 'src/app/services/admin/alertify.service';
 
 declare var $: any;
 
@@ -32,7 +33,8 @@ export class SelectProductImageDialogComponent
     @Inject(MAT_DIALOG_DATA) public data: SelectProductImageState | string,
     private productService: ProductService,
     private spinner: NgxSpinnerService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private alertifyService: AlertifyService
   ) {
     super(dialogRef);
   }
@@ -67,7 +69,7 @@ export class SelectProductImageDialogComponent
           imageId,
           () => {
             this.spinner.hide(SpinnerType.BallAtom);
-            var card = $(event.srcElement).parent().parent();
+            var card = $(event.srcElement).parent().parent().parent();
             card.fadeOut(500);
           }
         ), (errorMessage) =>{
@@ -78,11 +80,15 @@ export class SelectProductImageDialogComponent
     });
   }
 
-  showcase(imageId:string){
+  async showcase(imageId:string){
     this.spinner.show(SpinnerType.BallAtom);
-    this.productService.changeShowcaseImage(imageId, this.data  as string,()=>{
-      this.spinner.hide(SpinnerType.BallAtom);
-    })
+    await this.productService.changeShowcaseImage(imageId, this.data  as string,()=>{
+      this.alertifyService.message("Showcase picture set", {
+        messageType: MessageType.Success,
+        position: Position.TopRight
+      })
+    });
+    this.spinner.hide(SpinnerType.BallAtom);
   }
   
   setDefaultImage(e:any){
